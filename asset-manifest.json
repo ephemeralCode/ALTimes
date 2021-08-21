@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/altimes/static/css/main.e9bd79fc.chunk.css",
-    "main.js": "/altimes/static/js/main.1120b0dc.chunk.js",
-    "main.js.map": "/altimes/static/js/main.1120b0dc.chunk.js.map",
+    "main.js": "/altimes/static/js/main.ff110046.chunk.js",
+    "main.js.map": "/altimes/static/js/main.ff110046.chunk.js.map",
     "runtime-main.js": "/altimes/static/js/runtime-main.e3dc08fd.js",
     "runtime-main.js.map": "/altimes/static/js/runtime-main.e3dc08fd.js.map",
     "static/js/2.dfbfe25a.chunk.js": "/altimes/static/js/2.dfbfe25a.chunk.js",
@@ -10,13 +10,13 @@
     "index.html": "/altimes/index.html",
     "static/css/main.e9bd79fc.chunk.css.map": "/altimes/static/css/main.e9bd79fc.chunk.css.map",
     "static/js/2.dfbfe25a.chunk.js.LICENSE.txt": "/altimes/static/js/2.dfbfe25a.chunk.js.LICENSE.txt",
-    "static/js/main.1120b0dc.chunk.js.LICENSE.txt": "/altimes/static/js/main.1120b0dc.chunk.js.LICENSE.txt",
+    "static/js/main.ff110046.chunk.js.LICENSE.txt": "/altimes/static/js/main.ff110046.chunk.js.LICENSE.txt",
     "static/media/app.css": "/altimes/static/media/bg.581e1cc4.png"
   },
   "entrypoints": [
     "static/js/runtime-main.e3dc08fd.js",
     "static/js/2.dfbfe25a.chunk.js",
     "static/css/main.e9bd79fc.chunk.css",
-    "static/js/main.1120b0dc.chunk.js"
+    "static/js/main.ff110046.chunk.js"
   ]
 }
