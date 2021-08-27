@@ -1,4 +1,4 @@
 *{margin:0;padding:0;box-sizing:border-box}body{background-image:url(/altimes/static/media/bg.581e1cc4.png);background-repeat:no-repeat;background-position:top}.container{max-width:700px;width:100%;margin:70px auto auto;background-color:#646464;padding:15px}.containerTimer{margin-top:40px}.containerCommissionTitle,.containerTitle{display:flex;margin:5px 0;justify-content:space-between}.containerCommissionTitleAvailable{display:flex}.containerCommissionTitleEvent{display:flex;align-items:center;margin-left:15px}.containerCommissionTitleEvent input{margin-left:5px}.availableTimer{display:flex;margin:5px 0;justify-content:center}.addTimer{width:100%}
 
-/*! timer.jsx !*/.timer{display:flex;justify-content:space-between;margin-bottom:5px}
-/*# sourceMappingURL=main.e9bd79fc.chunk.css.map */
+/*! timer.jsx !*/.timer{display:flex;justify-content:space-between;margin-bottom:5px}.time{display:flex;justify-content:center}
+/*# sourceMappingURL=main.62ff8d97.chunk.css.map */
