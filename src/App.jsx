@@ -4,10 +4,10 @@ import { Timer } from './Timer';
 import './style/app.css'
 
 export default function App() {
-    const [amountTimers, setAmountTimers] = useState(4);
+    const amountTimers = 4;
     const [saveLocalTime, setSaveLocalTime] = useState({
         COMM: [
-
+            
         ],
 
         BOOK: [
@@ -40,7 +40,8 @@ export default function App() {
         {text: '01:10:00', value: 'COMM_01_10_00'},
         {text: '01:00:00', value: 'COMM_01_00_00'},
         {text: '00:30:00', value: 'COMM_00_30_00'},
-        {text: '00:20:00', value: 'COMM_00_20_00'}
+        {text: '00:20:00', value: 'COMM_00_20_00'},
+        {text: '00:05:00', value: 'COMM_00_05_00'},
     ]
 
     const bookTimes = [
@@ -65,83 +66,82 @@ export default function App() {
         {text: '00:30:00', value: 'PROJ_00_30_00'},
     ]
 
+    // проверка и создание LC
+    if (!localStorage.getItem('USER_TIME')) {
+        localStorage.setItem('USER_TIME', (JSON.stringify({COMM:[], BOOK:[], PROJ:[]})));
+    }
+
+    // создание таймера
     const setTime = (e) => {
         let typeTimer = e.target.name
+        let arrayTimes = JSON.parse(localStorage.getItem('USER_TIME'))
 
-        saveLocalTime[typeTimer].length ?
-            setSaveLocalTime((prev) => {
-                return {
-                    ...prev, 
-                    [typeTimer]: [
-                        ...prev[typeTimer], {
-                            id: prev[typeTimer][prev[typeTimer].length - 1].id + 1,
-                            time: '00:00:00'
-                        }
-                    ],
-                }
+        // сохранение в хук созданного таймера
+        setSaveLocalTime((prev) => {
+            return {
+                ...prev, 
+                [typeTimer]: [
+                    ...prev[typeTimer], {
+                        id: prev[typeTimer].length ? 
+                                prev[typeTimer][prev[typeTimer].length - 1].id + 1 : 0,
+                        savedDate: null,
+                        completedTime: '00:00:00',
+                        isActive: false,
+                        timerFinish: false
+                    }
+                ],
+            }
+        })
+
+        // сохранение в LC таймера
+        setSaveLocalTime((prev) => {
+            arrayTimes[typeTimer].push({
+                id: prev[typeTimer][prev[typeTimer].length - 1].id,
+                savedDate: null,
+                completedTime: '00:00:00',
+                isActive: false,
+                timerFinish: false
             })
+    
+            localStorage.USER_TIME = JSON.stringify(arrayTimes)
 
-            :
-
-            setSaveLocalTime((prev) => {
-                return {
-                    ...prev, 
-                    [typeTimer]: [
-                        ...prev[typeTimer], {
-                            id: 0,
-                            time: '00:00:00'
-                        }
-                    ],
-                }
-            })  
+            return prev
+        })     
     }
+
+    useEffect(() => {
+        let arrayTimes = JSON.parse(localStorage.getItem('USER_TIME'))
+
+        if(arrayTimes.COMM.length || arrayTimes.BOOK.length || arrayTimes.PROJ.length) {
+            setSaveLocalTime(() => {return arrayTimes})
+        }
+    }, [0])
 
     return (
         <div className='container'>
             {/*  COMM */}
-            <div className='containerTimer'>
-                <div className='containerCommissionTitle'>
-                    <p>COMMISSION</p>
+            <fieldset className='containerTimer'>
+                <legend className='containerTitle'>
+                    <p className='commissionTitle'>COMMISSION</p>
 
-                    <div className='containerCommissionTitleAvailable'>
+                    {/* <div className='containerCommissionTitleAvailable'>
                         <p>Available {amountTimers - saveLocalTime.COMM.length}</p>
-
-                        <label className='containerCommissionTitleEvent'>
-                            <p>Event</p>
-                            <input 
-                                type='checkbox' 
-                                onClick={(e) => {
-                                    setAmountTimers(e.target.checked ? 5 : 4)
-
-                                    {
-                                        saveLocalTime.COMM.length === 5 &&
-                                            setSaveLocalTime((prev) => {
-                                                return {
-                                                    ...prev, 
-                                                    COMM: [
-                                                        ...prev.COMM.slice(0, -1)
-                                                    ],
-                                                }
-                                            })
-                                    }
-                                }}
-                            />
-                        </label>
-                    </div>
-                </div>
+                    </div> */}
+                </legend>
                 
-                <div>
+                <div className='wrapperTimer'>
                     {
                         saveLocalTime.COMM.length ? 
-                            saveLocalTime.COMM.map((item, i) => {
+                            saveLocalTime.COMM.map((item, i) => { 
                                 return <Timer 
-                                    item={item} 
-                                    key={item.id}
-                                    id={i}
-                                    saveLocalTime={saveLocalTime} 
-                                    setSaveLocalTime={setSaveLocalTime}
-                                    times={commTimes}
-                                    typeTimer={'COMM'}
+                                   time={item}
+                                   key={item.id}
+                                   id={i}
+                                   setSaveLocalTime={setSaveLocalTime}
+                                   collectionTimes={commTimes}
+                                   typeTimer={'COMM'}
+                                   isActive={item.isActive}
+                                   timerFinish={item.timerFinish}
                                 />
                             })
                         
@@ -159,27 +159,29 @@ export default function App() {
                             onClick={(e) => {setTime(e)}}
                         >+</button>
                 }
-            </div>
+            </fieldset>
 
             {/* BOOK */}
-            <div className='containerTimer'>
-                <div className='containerTitle'>
+            <fieldset className='containerTimer'>
+                <legend className='containerTitle'>
                     <p>CLASSROOM</p>
-                    <div>Available {4 - saveLocalTime.BOOK.length}</div>
-                </div>
+
+                    {/* <div>Available {4 - saveLocalTime.BOOK.length}</div> */}
+                </legend>
                 
                 <div>
                     {
                         saveLocalTime.BOOK.length ? 
                             saveLocalTime.BOOK.map((item, i) => {
                                 return <Timer 
-                                    item={item} 
+                                    time={item}
                                     key={item.id}
                                     id={i}
-                                    saveLocalTime={saveLocalTime} 
                                     setSaveLocalTime={setSaveLocalTime}
-                                    times={bookTimes}
-                                    typeTimer={'BOOK'} 
+                                    collectionTimes={bookTimes}
+                                    typeTimer={'BOOK'}
+                                    isActive={item.isActive}
+                                    timerFinish={item.timerFinish}
                                 />
                             })
                         
@@ -197,27 +199,29 @@ export default function App() {
                             onClick={(e) => {setTime(e)}}
                         >+</button>
                 }
-            </div>
+            </fieldset>
 
             {/* PROJ */}
-            <div className='containerTimer'>
-                <div className='containerTitle'>
+            <fieldset className='containerTimer'>
+                <legend className='containerTitle'>
                     <p>LAB</p>
-                    <div>Available {1 - saveLocalTime.PROJ.length}</div>
-                </div>
+
+                    {/* <div>Available {1 - saveLocalTime.PROJ.length}</div> */}
+                </legend>
                 
                 <div>
                     {
                         saveLocalTime.PROJ.length ? 
                             saveLocalTime.PROJ.map((item, i) => {
                                 return <Timer 
-                                    item={item} 
+                                    time={item}
                                     key={item.id}
                                     id={i}
-                                    saveLocalTime={saveLocalTime} 
                                     setSaveLocalTime={setSaveLocalTime}
-                                    times={projTimes}
+                                    collectionTimes={projTimes}
                                     typeTimer={'PROJ'}
+                                    isActive={item.isActive}
+                                    timerFinish={item.timerFinish}
                                 />
                             })
                         
@@ -235,6 +239,17 @@ export default function App() {
                             onClick={(e) => {setTime(e)}}
                         >+</button>
                 }
+            </fieldset>
+
+            <div>
+                {/* //!TODO */}
+                <br/>
+                <button onClick = {() => {
+                    localStorage.clear()
+                    localStorage.setItem('USER_TIME', (JSON.stringify({COMM:[], BOOK:[], PROJ:[]})));
+                }}
+                    
+                >Update LC</button>
             </div>
         </div>
     )
