@@ -1,21 +1,22 @@
 {
   "files": {
-    "main.css": "/altimes/static/css/main.d913b2d2.chunk.css",
-    "main.js": "/altimes/static/js/main.e33e74a9.chunk.js",
-    "main.js.map": "/altimes/static/js/main.e33e74a9.chunk.js.map",
+    "main.css": "/altimes/static/css/main.145d2dd4.chunk.css",
+    "main.js": "/altimes/static/js/main.d12ca39c.chunk.js",
+    "main.js.map": "/altimes/static/js/main.d12ca39c.chunk.js.map",
     "runtime-main.js": "/altimes/static/js/runtime-main.e3dc08fd.js",
     "runtime-main.js.map": "/altimes/static/js/runtime-main.e3dc08fd.js.map",
     "static/js/2.1ac5882d.chunk.js": "/altimes/static/js/2.1ac5882d.chunk.js",
     "static/js/2.1ac5882d.chunk.js.map": "/altimes/static/js/2.1ac5882d.chunk.js.map",
     "index.html": "/altimes/index.html",
-    "static/css/main.d913b2d2.chunk.css.map": "/altimes/static/css/main.d913b2d2.chunk.css.map",
+    "static/css/main.145d2dd4.chunk.css.map": "/altimes/static/css/main.145d2dd4.chunk.css.map",
     "static/js/2.1ac5882d.chunk.js.LICENSE.txt": "/altimes/static/js/2.1ac5882d.chunk.js.LICENSE.txt",
-    "static/media/app.css": "/altimes/static/media/BG.4cc72418.png"
+    "static/media/app.css": "/altimes/static/media/BG.4cc72418.png",
+    "static/media/font.css": "/altimes/static/media/SFProDisplayRegular.d5ff9f68.woff2"
   },
   "entrypoints": [
     "static/js/runtime-main.e3dc08fd.js",
     "static/js/2.1ac5882d.chunk.js",
-    "static/css/main.d913b2d2.chunk.css",
-    "static/js/main.e33e74a9.chunk.js"
+    "static/css/main.145d2dd4.chunk.css",
+    "static/js/main.d12ca39c.chunk.js"
   ]
 }
