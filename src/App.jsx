@@ -1,7 +1,8 @@
 import React from 'react';
 import { useState, useEffect } from "react";
 import { Timer } from './Timer';
-import './style/app.css'
+import './style/app.css';
+import './style/font.css';
 
 export default function App() {
     const amountTimers = 4;
@@ -20,56 +21,64 @@ export default function App() {
     });
 
     const commTimes = [
-        {text: '10:00:00', value: 'COMM_10_00_00'},
-        {text: '09:00:00', value: 'COMM_09_00_00'},
-        {text: '08:00:00', value: 'COMM_08_00_00'},
-        {text: '06:00:00', value: 'COMM_06_00_00'},
-        {text: '05:20:00', value: 'COMM_05_20_00'},
-        {text: '05:00:00', value: 'COMM_05_00_00'},
-        {text: '04:00:00', value: 'COMM_04_00_00'},
-        {text: '03:20:00', value: 'COMM_03_20_00'},
-        {text: '03:00:00', value: 'COMM_03_00_00'},
-        {text: '02:40:00', value: 'COMM_02_40_00'},
-        {text: '02:30:00', value: 'COMM_02_30_00'},
-        {text: '02:15:00', value: 'COMM_02_15_00'},
-        {text: '02:00:00', value: 'COMM_02_00_00'},
-        {text: '01:45:00', value: 'COMM_01_45_00'},
-        {text: '01:40:00', value: 'COMM_01_40_00'},
-        {text: '01:30:00', value: 'COMM_01_30_00'},
-        {text: '01:20:00', value: 'COMM_01_20_00'},
-        {text: '01:10:00', value: 'COMM_01_10_00'},
-        {text: '01:00:00', value: 'COMM_01_00_00'},
-        {text: '00:30:00', value: 'COMM_00_30_00'},
+        {text: '00:01:00', value: 'COMM_00_01_00'},
         {text: '00:20:00', value: 'COMM_00_20_00'},
-        {text: '00:05:00', value: 'COMM_00_05_00'},
+        {text: '00:30:00', value: 'COMM_00_30_00'},
+        {text: '01:00:00', value: 'COMM_01_00_00'},
+        {text: '01:10:00', value: 'COMM_01_10_00'},
+        {text: '01:20:00', value: 'COMM_01_20_00'},
+        {text: '01:30:00', value: 'COMM_01_30_00'},
+        {text: '01:40:00', value: 'COMM_01_40_00'},
+        {text: '01:45:00', value: 'COMM_01_45_00'},
+        {text: '02:00:00', value: 'COMM_02_00_00'},
+        {text: '02:15:00', value: 'COMM_02_15_00'},
+        {text: '02:30:00', value: 'COMM_02_30_00'},
+        {text: '02:40:00', value: 'COMM_02_40_00'},
+        {text: '03:00:00', value: 'COMM_03_00_00'},
+        {text: '03:20:00', value: 'COMM_03_20_00'},
+        {text: '04:00:00', value: 'COMM_04_00_00'},
+        {text: '05:00:00', value: 'COMM_05_00_00'},
+        {text: '05:20:00', value: 'COMM_05_20_00'},
+        {text: '06:00:00', value: 'COMM_06_00_00'},
+        {text: '08:00:00', value: 'COMM_08_00_00'},
+        {text: '09:00:00', value: 'COMM_09_00_00'},
+        {text: '10:00:00', value: 'COMM_10_00_00'},
     ]
 
     const bookTimes = [
-        {text: '08:00:00', value: 'BOOK_08_00_00'},
+        {text: '02:00:00', value: 'BOOK_02_00_00'},
         {text: '04:00:00', value: 'BOOK_04_00_00'},
-        {text: '02:00:00', value: 'BOOK_02_00_00'}
+        {text: '08:00:00', value: 'BOOK_08_00_00'},
     ]
     
     const projTimes = [
-        {text: '12:00:00', value: 'PROJ_10_00_00'},
-        {text: '10:00:00', value: 'PROJ_10_00_00'},
-        {text: '09:00:00', value: 'PROJ_09_00_00'},
-        {text: '08:00:00', value: 'PROJ_08_00_00'},
-        {text: '06:00:00', value: 'PROJ_06_00_00'},
-        {text: '05:00:00', value: 'PROJ_05_00_00'},
-        {text: '04:00:00', value: 'PROJ_04_00_00'},
-        {text: '03:00:00', value: 'PROJ_03_00_00'},
-        {text: '02:30:00', value: 'PROJ_02_30_00'},
-        {text: '02:00:00', value: 'PROJ_02_00_00'},
-        {text: '01:30:00', value: 'PROJ_01_30_00'},
-        {text: '01:00:00', value: 'PROJ_01_00_00'},
         {text: '00:30:00', value: 'PROJ_00_30_00'},
+        {text: '01:00:00', value: 'PROJ_01_00_00'},
+        {text: '01:30:00', value: 'PROJ_01_30_00'},
+        {text: '02:00:00', value: 'PROJ_02_00_00'},
+        {text: '02:30:00', value: 'PROJ_02_30_00'},
+        {text: '03:00:00', value: 'PROJ_03_00_00'},
+        {text: '04:00:00', value: 'PROJ_04_00_00'},
+        {text: '05:00:00', value: 'PROJ_05_00_00'},
+        {text: '06:00:00', value: 'PROJ_06_00_00'},
+        {text: '08:00:00', value: 'PROJ_08_00_00'},
+        {text: '09:00:00', value: 'PROJ_09_00_00'},
+        {text: '10:00:00', value: 'PROJ_10_00_00'},
+        {text: '12:00:00', value: 'PROJ_10_00_00'},  
     ]
 
     // проверка и создание LC
     if (!localStorage.getItem('USER_TIME')) {
         localStorage.setItem('USER_TIME', (JSON.stringify({COMM:[], BOOK:[], PROJ:[]})));
     }
+
+    useEffect(() => {
+        let arrayTimes = JSON.parse(localStorage.getItem('USER_TIME'))
+
+        if(arrayTimes.COMM.length || arrayTimes.BOOK.length || arrayTimes.PROJ.length) {
+            setSaveLocalTime(() => {return arrayTimes})
+        }
+    }, [0])
 
     // создание таймера
     const setTime = (e) => {
@@ -108,14 +117,6 @@ export default function App() {
             return prev
         })     
     }
-
-    useEffect(() => {
-        let arrayTimes = JSON.parse(localStorage.getItem('USER_TIME'))
-
-        if(arrayTimes.COMM.length || arrayTimes.BOOK.length || arrayTimes.PROJ.length) {
-            setSaveLocalTime(() => {return arrayTimes})
-        }
-    }, [0])
 
     return (
         <div className='container'>
@@ -169,7 +170,7 @@ export default function App() {
                     {/* <div>Available {4 - saveLocalTime.BOOK.length}</div> */}
                 </legend>
                 
-                <div>
+                <div className='wrapperTimer'>
                     {
                         saveLocalTime.BOOK.length ? 
                             saveLocalTime.BOOK.map((item, i) => {
@@ -209,7 +210,7 @@ export default function App() {
                     {/* <div>Available {1 - saveLocalTime.PROJ.length}</div> */}
                 </legend>
                 
-                <div>
+                <div className='wrapperTimer'>
                     {
                         saveLocalTime.PROJ.length ? 
                             saveLocalTime.PROJ.map((item, i) => {
@@ -241,8 +242,8 @@ export default function App() {
                 }
             </fieldset>
 
-            <div>
-                {/* //!TODO */}
+            {/* <div>
+ 
                 <br/>
                 <button onClick = {() => {
                     localStorage.clear()
@@ -250,7 +251,7 @@ export default function App() {
                 }}
                     
                 >Update LC</button>
-            </div>
+            </div> */}
         </div>
     )
 }

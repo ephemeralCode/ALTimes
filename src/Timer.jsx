@@ -5,9 +5,8 @@ export function Timer(props) {
     const didMount = useRef(false)
     const [time, setTime] = useState('Select time')
     const [startTimer, setStartTimer] = useState(false)
-    const [isActive, setIsActive] = useState(props.isActive)
     const [finishingTime, setFinishingTime] = useState(
-        isActive &&
+        props.isActive &&
             new Date(props.time.savedDate)
     )
     const [remainingTime, setRemainingTime] = useState({
@@ -18,13 +17,6 @@ export function Timer(props) {
 
     let zeroLength = 2;
     let interval = useRef();
-
-    // const notificationFinishTimer = () => {
-    //     interval.current = setInterval(() => {
-
-    //         document.title = 'Timer complete!'
-    //     }, 1000 )
-    // }
 
     //* remove timer
     const removeTime = () => {
@@ -86,6 +78,8 @@ export function Timer(props) {
             setFinishingTime(finishingTime.setMinutes(finishingTime.getMinutes() + Number(minutes)))
             setFinishingTime(finishingTime.setSeconds(finishingTime.getSeconds() + Number(seconds)))
 
+            console.log(finishingTime)
+
             saveChanges(
                 finishingTime.toJSON(),
                 `${String(finishingTime.getHours()).padStart(zeroLength, '0')}:${String(finishingTime.getMinutes()).padStart(zeroLength, '0')}:${String(finishingTime.getSeconds()).padStart(zeroLength, '0')}`,
@@ -98,7 +92,7 @@ export function Timer(props) {
 
     //* TimerOn/Off
     useEffect(() => {
-        if (isActive) {
+        if (didMount.current || props.isActive) {
             interval.current = setInterval(() => {
                 const currentTime = new Date()
                 let countDownTime = new Date()
@@ -118,7 +112,6 @@ export function Timer(props) {
                     })
                 } else {
                     clearInterval(interval.current)
-                    setIsActive(false)
                     setRemainingTime((prev) => {
                         return {
                             ...prev,
@@ -130,11 +123,11 @@ export function Timer(props) {
                     saveChanges(
                         null,
                         `${String(finishingTime.getHours()).padStart(zeroLength, '0')}:${String(finishingTime.getMinutes()).padStart(zeroLength, '0')}:${String(finishingTime.getSeconds()).padStart(zeroLength, '0')}`,
-                        true,
+                        false,
                         true
                     )
 
-                    // notificationFinishTimer()
+                    //TODO tabTitleNotify()
                 }
             }, 1000)
 
@@ -144,7 +137,6 @@ export function Timer(props) {
 
     }, [startTimer])
 
-
     return (
         <div className='wrapperShowTimer'>
             <div className='timer'>
@@ -153,7 +145,6 @@ export function Timer(props) {
                         <button className='completedTimerBtn' onClick={() => {
                             clearInterval(interval.current)
                             didMount.current = false
-                            setIsActive(false)
                             removeTime()
                         }}></button>
                 }
@@ -171,7 +162,7 @@ export function Timer(props) {
                 { 
                     !props.timerFinish ?
                         !startTimer ? 
-                            !isActive &&
+                            !props.isActive &&
                                 <>   
                                     <select className='wrapperTimerSelect' onClick={(e) => {
                                         setTime(e.target.options[e.target.selectedIndex].value)
@@ -187,7 +178,6 @@ export function Timer(props) {
                                     <button className='startTimerBtn' disabled={time === 'Select time' ? true : false} 
                                         onClick={() => {
                                             setFinishingTime(new Date())
-                                            setIsActive(true)
                                             setStartTimer(true)
                                             didMount.current = true
                                         }}
@@ -204,12 +194,11 @@ export function Timer(props) {
                 }
 
                 {
-                    isActive ?
+                    props.isActive ?
                         <button className='cancelTimerBtn' onClick={() => {
                             clearInterval(interval.current)
                             setStartTimer(false)
                             didMount.current = false
-                            setIsActive(false)
                             setTime('Select time')
                             setRemainingTime((prev) => {
                                 return {
@@ -232,7 +221,6 @@ export function Timer(props) {
                         <button className='removeTimerBtn' onClick={() => {
                             clearInterval(interval.current)
                             didMount.current = false
-                            setIsActive(false)
                             removeTime()
                         }}>Remove</button>
                 }
