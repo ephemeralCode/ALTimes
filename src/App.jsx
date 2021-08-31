@@ -121,7 +121,7 @@ export default function App() {
     return (
         <div className='container'>
             {/*  COMM */}
-            <fieldset className='containerTimer'>
+            <fieldset className='containerTimers'>
                 <legend className='containerTitle'>
                     <p className='commissionTitle'>COMMISSION</p>
 
@@ -163,7 +163,7 @@ export default function App() {
             </fieldset>
 
             {/* BOOK */}
-            <fieldset className='containerTimer'>
+            <fieldset className='containerTimers'>
                 <legend className='containerTitle'>
                     <p>CLASSROOM</p>
 
@@ -203,7 +203,7 @@ export default function App() {
             </fieldset>
 
             {/* PROJ */}
-            <fieldset className='containerTimer'>
+            <fieldset className='containerTimers'>
                 <legend className='containerTitle'>
                     <p>LAB</p>
 

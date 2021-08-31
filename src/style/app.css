@@ -25,11 +25,11 @@ body{
     overflow-y: scroll;
 }
 
-.containerTimer{
+.containerTimers{
     border: 2px solid #FAE600;
 }
 
-.containerTimer + .containerTimer{
+.containerTimers + .containerTimers{
     margin-top: 40px;
 }
 
@@ -86,10 +86,8 @@ body{
 }
 
 /*! timer.jsx !*/
-.wrapperShowTimer{
+.containerTimer{
     display: flex;
-    justify-content: space-between;
-    align-items: center;
     margin: 8px 0;
     
     border-bottom: 1px solid #FAE600;
@@ -98,24 +96,14 @@ body{
     color: rgb(240, 240, 240)
 }
 
-.timer{
+.conteinerTimerStart{
     display: flex;
+    max-width: 280px;
+    width: 100%;
 }
 
-.showTime{
-    padding: 20px 20px;
-}
-
-.time{
-    display: flex;
-    justify-content: center;
-
-    font-size: 38px;
-}
-
-.completedTimerBtn{
+.completedTimerBtn, .removeTimerBtn, .startTimerBtn, .cancelTimerBtn{
     background: #FAE600;
-    background-image: url('/src/img/iconComplete.png');
     background-repeat: no-repeat;
     background-position: center center;
 
@@ -125,20 +113,50 @@ body{
     cursor: pointer;
 }
 
-.wrapperTimerBtn{
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-
-    max-width: 60%;
-    width: 100%;
-
-    padding: 20px 20px;
+.completedTimerBtn{
+    background-image: url('/src/img/iconComplete.png');
 }
 
-.wrapperTimerSelect{
+.removeTimerBtn{
+    background-image: url('/src/img/iconRemove.png');
+}
+
+.cancelTimerBtn{
+    background-image: url('/src/img/iconCancel.png');
+}
+
+.timer{
+    padding: 20px 20px 20px 30px;
+}
+
+.time{
+    display: flex;
+    justify-content: flex-start;
+    font-size: 38px;
+}
+
+.containerTimerBtn{
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.completedTimerText{
+    color: #FAE600;
+}
+
+.containerTimerSelect{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+}
+
+.timerSelect{
     background: #202020;
     border: 1px solid #FAE600;
+
+    align-self: center;
 
     width: 90px;
     height: 40px;
@@ -146,59 +164,25 @@ body{
     color: rgb(240, 240, 240)
 }
 
-.removeTimerBtn, .cancelTimerBtn, .startTimerBtn{
-    background: #FAE600;
-    position: relative;
-
-    margin: 5px 0 5px 30px;
-    max-width: 100px;
-    max-height: 100px;
-    width: 100%;
-    height: 30px;
-
-    border: none;
-    cursor: pointer;
-
-    font-size: 15px;
+.startTimerBtn{
+    font-size: 18px;
     font-weight: bold;
-    text-transform: uppercase;
-
-    /* clip-path: polygon(100% 0, 100% 80%, 80% 100%, 0 100%, 0 20%, 20% 0);
-    -webkit-clip-path: polygon(100% 0, 100% 80%, 80% 100%, 0 100%, 0 20%, 20% 0); */
 }
 
-.removeTimerBtn:after, .cancelTimerBtn:after, .startTimerBtn:after{
-    content: '';
-    position: absolute;
-
-    top: -5px;
-    left: -5px;
-    right: -5px;
-    bottom: -5px;
-
-    border: 2px solid #FAE600;
-}
-
-.completedTimerText{
-    color: #FAE600;
-}
-
+/*! scrollstyle !*/
 ::-webkit-scrollbar {
     width: 0.5vw;
-  }
+}
   
-  /* Track */
-  ::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
     border-radius: 10px;
-  }
-   
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
+}
+
+::-webkit-scrollbar-thumb {
     background: #FAE600; 
     border-radius: 10px;
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
+}
+
+::-webkit-scrollbar-thumb:hover {
     background: #FAE600; 
-  }
+}
