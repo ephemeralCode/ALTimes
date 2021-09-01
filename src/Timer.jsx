@@ -18,6 +18,17 @@ export function Timer(props) {
     const zeroLength = 2;
     const interval = useRef();
 
+    //* scrollTimer
+    function scrollHandler(e){
+        e.preventDefault()
+
+        if(e.deltaY === -100){
+            if(e.target.options.selectedIndex !== 0) {e.target.options.selectedIndex--}
+        } else if(e.deltaY === 100){
+            if(e.target.options.selectedIndex !== e.target.options.length - 1) {e.target.options.selectedIndex++}
+        }
+    }
+
     //* remove timer
     const removeTime = () => {
         let arrayTimes = JSON.parse(localStorage.getItem('USER_TIME'))
@@ -38,7 +49,6 @@ export function Timer(props) {
         localStorage.USER_TIME = JSON.stringify(arrayTimes)
     }
 
-    //
     const saveChanges = (savedDate, completedTime, isActive, finishTimer) => {
         let arrayTimes = JSON.parse(localStorage.getItem('USER_TIME'))
 
@@ -78,8 +88,6 @@ export function Timer(props) {
             setFinishingTime(finishingTime.setMinutes(finishingTime.getMinutes() + Number(minutes)))
             setFinishingTime(finishingTime.setSeconds(finishingTime.getSeconds() + Number(seconds)))
 
-            console.log(finishingTime)
-
             saveChanges(
                 finishingTime.toJSON(),
                 `${String(finishingTime.getHours()).padStart(zeroLength, '0')}:${String(finishingTime.getMinutes()).padStart(zeroLength, '0')}:${String(finishingTime.getSeconds()).padStart(zeroLength, '0')}`,
@@ -87,8 +95,6 @@ export function Timer(props) {
                 false
             )
         } 
-
-        console.log('yay')
 
     }, [startTimer])
 
@@ -165,19 +171,28 @@ export function Timer(props) {
                             ${String(remainingTime.hours).padStart(zeroLength, '0')}:${String(remainingTime.minutes).padStart(zeroLength, '0')}:${String(remainingTime.seconds).padStart(zeroLength, '0')}
                         `}</p>
                         
-                        <span className='completedTimerText'>Completed: </span><span>{props.time.completedTime}</span>
+                        <div className='containerCompletedTimerText'>
+                            <p className='completedTimerText'>Completed: </p>
+                            <p>{props.time.completedTime}</p>
+                        </div>
                     </div>
                 </div>
 
-                <div className='containerTimerBtn'>
+                <div className='containerTimerEnd'>
                     { 
                         !props.timerFinish ?
                             !startTimer ? 
                                 !props.isActive &&
-                                    <div className='containerTimerSelect'>   
-                                        <select className='timerSelect' onClick={(e) => {
-                                            setTime(e.target.options[e.target.selectedIndex].value)
-                                        }}>                   
+                                    <div className='containerTimerSelect'>
+                                        {/* select times */}   
+                                        <select 
+                                            className='timerSelect'
+                                            onWheel={(e) => scrollHandler(e)}
+                                            onClick={(e) => {
+                                                setTime(e.target.options[e.target.selectedIndex].value)
+                                            }}
+                                        > 
+
                                             <option>Select time</option>
                                             {
                                                 props.collectionTimes.map((item, i) => {
@@ -185,14 +200,18 @@ export function Timer(props) {
                                                 })
                                             }  
                                         </select>
-
-                                        <button className='startTimerBtn' disabled={time === 'Select time' ? true : false} 
+                                        
+                                        {/* start btn */}
+                                        <button 
+                                            style={time === 'Select time' ? {cursor: 'not-allowed', opacity: '50%'} : {cursor: 'pointer'}}
+                                            className='startTimerBtn' 
+                                            disabled={time === 'Select time' ? true : false} 
                                             onClick={() => {
                                                 setFinishingTime(new Date())
                                                 setStartTimer(true)
                                                 didMount.current = true
                                             }}
-                                        >GO</button>
+                                        ></button>
                                     </div>
 
                             :

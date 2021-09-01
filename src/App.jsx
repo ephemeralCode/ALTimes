@@ -124,10 +124,6 @@ export default function App() {
             <fieldset className='containerTimers'>
                 <legend className='containerTitle'>
                     <p className='commissionTitle'>COMMISSION</p>
-
-                    {/* <div className='containerCommissionTitleAvailable'>
-                        <p>Available {amountTimers - saveLocalTime.COMM.length}</p>
-                    </div> */}
                 </legend>
                 
                 <div className='wrapperTimer'>
@@ -148,17 +144,21 @@ export default function App() {
                         
                             : 
                         
-                            <div className='availableTimer'>Not found</div>
+                            <div className='availableTimerText'>Not found</div>
                     }
+                </div>
+
+                <div className='containerTitleAvailable'>
+                    <p className='titleAvailable'>Available:</p><p>{amountTimers - saveLocalTime.COMM.length}</p>
                 </div>
                 
                 {
                     saveLocalTime.COMM.length !== amountTimers && 
                         <button 
                             name='COMM'
-                            className='addTimer' 
+                            className='addTimerBtn' 
                             onClick={(e) => {setTime(e)}}
-                        >+</button>
+                        ></button>
                 }
             </fieldset>
 
@@ -166,8 +166,6 @@ export default function App() {
             <fieldset className='containerTimers'>
                 <legend className='containerTitle'>
                     <p>CLASSROOM</p>
-
-                    {/* <div>Available {4 - saveLocalTime.BOOK.length}</div> */}
                 </legend>
                 
                 <div className='wrapperTimer'>
@@ -188,17 +186,21 @@ export default function App() {
                         
                             : 
                         
-                            <div className='availableTimer'>Not found</div>
+                            <div className='availableTimerText'>Not found</div>
                     }
+                </div>
+
+                <div className='containerTitleAvailable'>
+                    <p className='titleAvailable'>Available:</p><p>{4 - saveLocalTime.BOOK.length}</p>
                 </div>
                 
                 {
                     saveLocalTime.BOOK.length !== 4 && 
                         <button 
                             name='BOOK'
-                            className='addTimer' 
+                            className='addTimerBtn' 
                             onClick={(e) => {setTime(e)}}
-                        >+</button>
+                        ></button>
                 }
             </fieldset>
 
@@ -206,8 +208,6 @@ export default function App() {
             <fieldset className='containerTimers'>
                 <legend className='containerTitle'>
                     <p>LAB</p>
-
-                    {/* <div>Available {1 - saveLocalTime.PROJ.length}</div> */}
                 </legend>
                 
                 <div className='wrapperTimer'>
@@ -228,17 +228,21 @@ export default function App() {
                         
                             : 
                         
-                            <div className='availableTimer'>Not found</div>
+                            <div className='availableTimerText'>Not found</div>
                     }
+                </div>
+
+                <div className='containerTitleAvailable'>
+                    <p className='titleAvailable'>Available:</p><p>{1 - saveLocalTime.PROJ.length}</p>
                 </div>
                 
                 {
                     saveLocalTime.PROJ.length !== 1 && 
                         <button 
                             name='PROJ'
-                            className='addTimer' 
+                            className='addTimerBtn' 
                             onClick={(e) => {setTime(e)}}
-                        >+</button>
+                        ></button>
                 }
             </fieldset>
 
