@@ -1,4 +1,4 @@
-ALTimes (https://ephemeralcode.github.io/altimes/)
+ALTimes (link: https://ephemeralcode.github.io/altimes/)
 
 A simple tool for the game Azur Lane that helps you keep track of your commissions, class room etc. so that you can  optimize your time usage.
 
