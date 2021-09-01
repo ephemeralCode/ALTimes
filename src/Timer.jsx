@@ -19,13 +19,17 @@ export function Timer(props) {
     const interval = useRef();
 
     //* scrollTimer
-    function scrollHandler(e){
-        e.preventDefault()
-
-        if(e.deltaY === -100){
-            if(e.target.options.selectedIndex !== 0) {e.target.options.selectedIndex--}
-        } else if(e.deltaY === 100){
-            if(e.target.options.selectedIndex !== e.target.options.length - 1) {e.target.options.selectedIndex++}
+    const scrollHandler = (e) => {
+        if(e.deltaY < 0){
+            if(e.target.options.selectedIndex !== 0) {
+                e.target.options.selectedIndex--
+                setTime(e.target.options[e.target.selectedIndex].value)
+            }
+        } else if(e.deltaY > 0){
+            if(e.target.options.selectedIndex !== e.target.options.length - 1) {
+                e.target.options.selectedIndex++
+                setTime(e.target.options[e.target.selectedIndex].value)
+            }
         }
     }
 
