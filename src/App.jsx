@@ -21,7 +21,6 @@ export default function App() {
     });
 
     const commTimes = [
-        {text: '00:01:00', value: 'COMM_00_01_00'},
         {text: '00:20:00', value: 'COMM_00_20_00'},
         {text: '00:30:00', value: 'COMM_00_30_00'},
         {text: '01:00:00', value: 'COMM_01_00_00'},
@@ -119,143 +118,155 @@ export default function App() {
     }
 
     return (
-        <div className='container'>
-            {/*  COMM */}
-            <fieldset className='containerTimers'>
-                <legend className='containerTitle'>
-                    <p className='commissionTitle'>COMMISSION</p>
-                </legend>
-                
-                <div className='wrapperTimer'>
-                    {
-                        saveLocalTime.COMM.length ? 
-                            saveLocalTime.COMM.map((item, i) => { 
-                                return <Timer 
-                                   time={item}
-                                   key={item.id}
-                                   id={i}
-                                   setSaveLocalTime={setSaveLocalTime}
-                                   collectionTimes={commTimes}
-                                   typeTimer={'COMM'}
-                                   isActive={item.isActive}
-                                   timerFinish={item.timerFinish}
-                                />
-                            })
-                        
-                            : 
-                        
-                            <div className='availableTimerText'>Not found</div>
-                    }
-                </div>
+        <>
+            <div className='containerBgTitle'>
+                <p className='bgTitle'>ALTimes</p>
+            </div>
 
-                <div className='containerTitleAvailable'>
-                    <p className='titleAvailable'>Available:</p><p>{amountTimers - saveLocalTime.COMM.length}</p>
-                </div>
-                
-                {
-                    saveLocalTime.COMM.length !== amountTimers && 
-                        <button 
-                            name='COMM'
-                            className='addTimerBtn' 
-                            onClick={(e) => {setTime(e)}}
-                        ></button>
-                }
-            </fieldset>
-
-            {/* BOOK */}
-            <fieldset className='containerTimers'>
-                <legend className='containerTitle'>
-                    <p>CLASSROOM</p>
-                </legend>
-                
-                <div className='wrapperTimer'>
-                    {
-                        saveLocalTime.BOOK.length ? 
-                            saveLocalTime.BOOK.map((item, i) => {
-                                return <Timer 
-                                    time={item}
-                                    key={item.id}
-                                    id={i}
-                                    setSaveLocalTime={setSaveLocalTime}
-                                    collectionTimes={bookTimes}
-                                    typeTimer={'BOOK'}
-                                    isActive={item.isActive}
-                                    timerFinish={item.timerFinish}
-                                />
-                            })
-                        
-                            : 
-                        
-                            <div className='availableTimerText'>Not found</div>
-                    }
-                </div>
-
-                <div className='containerTitleAvailable'>
-                    <p className='titleAvailable'>Available:</p><p>{4 - saveLocalTime.BOOK.length}</p>
-                </div>
-                
-                {
-                    saveLocalTime.BOOK.length !== 4 && 
-                        <button 
-                            name='BOOK'
-                            className='addTimerBtn' 
-                            onClick={(e) => {setTime(e)}}
-                        ></button>
-                }
-            </fieldset>
-
-            {/* PROJ */}
-            <fieldset className='containerTimers'>
-                <legend className='containerTitle'>
-                    <p>LAB</p>
-                </legend>
-                
-                <div className='wrapperTimer'>
-                    {
-                        saveLocalTime.PROJ.length ? 
-                            saveLocalTime.PROJ.map((item, i) => {
-                                return <Timer 
-                                    time={item}
-                                    key={item.id}
-                                    id={i}
-                                    setSaveLocalTime={setSaveLocalTime}
-                                    collectionTimes={projTimes}
-                                    typeTimer={'PROJ'}
-                                    isActive={item.isActive}
-                                    timerFinish={item.timerFinish}
-                                />
-                            })
-                        
-                            : 
-                        
-                            <div className='availableTimerText'>Not found</div>
-                    }
-                </div>
-
-                <div className='containerTitleAvailable'>
-                    <p className='titleAvailable'>Available:</p><p>{1 - saveLocalTime.PROJ.length}</p>
-                </div>
-                
-                {
-                    saveLocalTime.PROJ.length !== 1 && 
-                        <button 
-                            name='PROJ'
-                            className='addTimerBtn' 
-                            onClick={(e) => {setTime(e)}}
-                        ></button>
-                }
-            </fieldset>
-
-            {/* <div>
- 
-                <br/>
-                <button onClick = {() => {
-                    localStorage.clear()
-                    localStorage.setItem('USER_TIME', (JSON.stringify({COMM:[], BOOK:[], PROJ:[]})));
-                }}
+            <div className='container'>
+                {/*  COMM */}
+                <fieldset className='containerTimers'>
+                    <legend className='containerTitle'>
+                        <p className='commissionTitle'>COMMISSION</p>
+                    </legend>
                     
-                >Update LC</button>
-            </div> */}
-        </div>
+                    <div className='wrapperTimer'>
+                        {
+                            saveLocalTime.COMM.length ? 
+                                saveLocalTime.COMM.map((item, i) => { 
+                                    return <Timer 
+                                    time={item}
+                                    key={item.id}
+                                    id={i}
+                                    setSaveLocalTime={setSaveLocalTime}
+                                    collectionTimes={commTimes}
+                                    typeTimer={'COMM'}
+                                    isActive={item.isActive}
+                                    timerFinish={item.timerFinish}
+                                    />
+                                })
+                            
+                                : 
+                            
+                                <div className='availableTimerText'>Not found</div>
+                        }
+                    </div>
+                    
+                    {
+                        saveLocalTime.COMM.length !== amountTimers && 
+                            <div className='containerAddTimerBtn'>
+                                <button 
+                                    name='COMM'
+                                    className='addTimerBtn' 
+                                    onClick={(e) => {setTime(e)}}
+                                ></button>
+                                
+                                <div className='containerTitleAvailable'>
+                                    <p className='titleAvailable'>Available:</p><p>{amountTimers - saveLocalTime.COMM.length}</p>
+                                </div>
+                            </div>
+                    }
+                </fieldset>
+
+                {/* BOOK */}
+                <fieldset className='containerTimers'>
+                    <legend className='containerTitle'>
+                        <p>CLASSROOM</p>
+                    </legend>
+                    
+                    <div className='wrapperTimer'>
+                        {
+                            saveLocalTime.BOOK.length ? 
+                                saveLocalTime.BOOK.map((item, i) => {
+                                    return <Timer 
+                                        time={item}
+                                        key={item.id}
+                                        id={i}
+                                        setSaveLocalTime={setSaveLocalTime}
+                                        collectionTimes={bookTimes}
+                                        typeTimer={'BOOK'}
+                                        isActive={item.isActive}
+                                        timerFinish={item.timerFinish}
+                                    />
+                                })
+                            
+                                : 
+                            
+                                <div className='availableTimerText'>Not found</div>
+                        }
+                    </div>
+                    
+                    {
+                        saveLocalTime.BOOK.length !== 4 && 
+                            <div className='containerAddTimerBtn'>
+                                <button 
+                                    name='BOOK'
+                                    className='addTimerBtn' 
+                                    onClick={(e) => {setTime(e)}}
+                                ></button>
+
+                                <div className='containerTitleAvailable'>
+                                    <p className='titleAvailable'>Available:</p><p>{4 - saveLocalTime.BOOK.length}</p>
+                                </div>
+                            </div>
+                    }
+                </fieldset>
+
+                {/* PROJ */}
+                <fieldset className='containerTimers'>
+                    <legend className='containerTitle'>
+                        <p>LAB</p>
+                    </legend>
+                    
+                    <div className='wrapperTimer'>
+                        {
+                            saveLocalTime.PROJ.length ? 
+                                saveLocalTime.PROJ.map((item, i) => {
+                                    return <Timer 
+                                        time={item}
+                                        key={item.id}
+                                        id={i}
+                                        setSaveLocalTime={setSaveLocalTime}
+                                        collectionTimes={projTimes}
+                                        typeTimer={'PROJ'}
+                                        isActive={item.isActive}
+                                        timerFinish={item.timerFinish}
+                                    />
+                                })
+                            
+                                : 
+                            
+                                <div className='availableTimerText'>Not found</div>
+                        }
+                    </div>
+                    
+                    {
+                        saveLocalTime.PROJ.length !== 1 &&
+                            <div className='containerAddTimerBtn'>
+                                <button 
+                                    name='PROJ'
+                                    className='addTimerBtn' 
+                                    onClick={(e) => {setTime(e)}}
+                                ></button>
+
+                                <div className='containerTitleAvailable'>
+                                    <p className='titleAvailable'>Available:</p><p>{1 - saveLocalTime.PROJ.length}</p>
+                                </div>
+                            </div>
+                    }
+                </fieldset>
+
+                {/* <div>
+    
+                    <br/>
+                    <button onClick = {() => {
+                        localStorage.clear()
+                        localStorage.setItem('USER_TIME', (JSON.stringify({COMM:[], BOOK:[], PROJ:[]})));
+                    }}
+                        
+                    >Update LC</button>
+                </div> */}
+            </div>
+        </>
     )
 }
