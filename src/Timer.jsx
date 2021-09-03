@@ -193,7 +193,11 @@ export function Timer(props) {
                                             className='timerSelect'
                                             onWheel={(e) => scrollHandler(e)}
                                             onClick={(e) => {
-                                                setTime(e.target.options[e.target.selectedIndex].value)
+                                                if(e.target.options){
+                                                    setTime(e.target.options[e.target.selectedIndex].value)
+                                                    return
+                                                }
+                                                setTime(e.target.value)
                                             }}
                                         > 
 
