@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/altimes/static/css/main.9c05724c.chunk.css",
-    "main.js": "/altimes/static/js/main.377b790b.chunk.js",
-    "main.js.map": "/altimes/static/js/main.377b790b.chunk.js.map",
+    "main.css": "/altimes/static/css/main.ec8cef55.chunk.css",
+    "main.js": "/altimes/static/js/main.5e430866.chunk.js",
+    "main.js.map": "/altimes/static/js/main.5e430866.chunk.js.map",
     "runtime-main.js": "/altimes/static/js/runtime-main.e3dc08fd.js",
     "runtime-main.js.map": "/altimes/static/js/runtime-main.e3dc08fd.js.map",
     "static/js/2.1ac5882d.chunk.js": "/altimes/static/js/2.1ac5882d.chunk.js",
     "static/js/2.1ac5882d.chunk.js.map": "/altimes/static/js/2.1ac5882d.chunk.js.map",
     "index.html": "/altimes/index.html",
-    "static/css/main.9c05724c.chunk.css.map": "/altimes/static/css/main.9c05724c.chunk.css.map",
+    "static/css/main.ec8cef55.chunk.css.map": "/altimes/static/css/main.ec8cef55.chunk.css.map",
     "static/js/2.1ac5882d.chunk.js.LICENSE.txt": "/altimes/static/js/2.1ac5882d.chunk.js.LICENSE.txt",
     "static/media/app.css": "/altimes/static/media/BG.4cc72418.png",
-    "static/media/font.css": "/altimes/static/media/SFProDisplayRegular.d5ff9f68.woff2"
+    "static/media/font.css": "/altimes/static/media/SFProDisplaySemibold.3926eb65.woff2"
   },
   "entrypoints": [
     "static/js/runtime-main.e3dc08fd.js",
     "static/js/2.1ac5882d.chunk.js",
-    "static/css/main.9c05724c.chunk.css",
-    "static/js/main.377b790b.chunk.js"
+    "static/css/main.ec8cef55.chunk.css",
+    "static/js/main.5e430866.chunk.js"
   ]
 }
