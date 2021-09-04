@@ -6,6 +6,8 @@
 }
 
 body{
+    position: relative;
+
     background-image: url('/src/img/BG.png');
     background-repeat: no-repeat;
     background-position: top center;
@@ -18,22 +20,22 @@ body{
             user-select: none;                       
 }
 
-
-.bgTitle{
+.containerBgTitle{
     position: absolute;
-    top: calc(50vh + 350px);
+    top: calc(50vh + 250px);
     left: calc((95vw - 100%) / -2);
 
+    transform: rotate(-90deg);
+    transform-origin: top left;
+}
+
+.bgTitle{
     font-family: 'SFSemibold';
     letter-spacing: 0.03em;
     font-size: 180px;
     
     -webkit-text-stroke: 2px rgba(230, 230, 230, 0.7);
     -webkit-text-fill-color: rgba(255, 255, 255, 0);
-    
-
-    transform-origin: top left;
-    transform: rotate(-90deg);
 }
 
 .bgTitle::after{
@@ -48,6 +50,17 @@ body{
     border-radius: 50%;
 
     background: #FAE600;
+}
+
+.ver{
+    position: absolute;
+    top: 144px;
+    right: -30px;
+
+    transform: rotate(90deg);
+
+    font-size: 20px;
+    color: #FAE600;
 }
 
 .container{

@@ -21,6 +21,7 @@ export default function App() {
     });
 
     const commTimes = [
+        {text: '00:10:00', value: 'COMM_00_10_00'},
         {text: '00:20:00', value: 'COMM_00_20_00'},
         {text: '00:30:00', value: 'COMM_00_30_00'},
         {text: '01:00:00', value: 'COMM_01_00_00'},
@@ -120,7 +121,8 @@ export default function App() {
     return (
         <>
             <div className='containerBgTitle'>
-                <p className='bgTitle'>ALTimes</p>
+                <p className='bgTitle'>ALTimes </p>
+                <p className='ver'>v. 0.1</p>
             </div>
 
             <div className='container'>

@@ -18,6 +18,14 @@ export function Timer(props) {
     const zeroLength = 2;
     const interval = useRef();
 
+    //* timer finishing sound notification
+    function tabTitleNotify() {
+        let audio = new Audio('media/notify.mp3');
+
+        audio.volume = 0.3;
+        audio.play();
+    }
+
     //* scrollTimer
     const scrollHandler = (e) => {
         if(e.deltaY < 0){
@@ -139,7 +147,7 @@ export function Timer(props) {
                         true
                     )
 
-                    //TODO tabTitleNotify()
+                    tabTitleNotify()
                 }
             }, 1000)
 
@@ -232,7 +240,7 @@ export function Timer(props) {
                     }
 
                     {
-                        props.isActive ?
+                        props.isActive &&
                             <button className='cancelTimerBtn' onClick={() => {
                                 clearInterval(interval.current)
                                 setStartTimer(false)
@@ -248,10 +256,6 @@ export function Timer(props) {
                                 })
                                 saveChanges(null, '00:00:00', false, false)
                             }}></button>
-                        
-                        :
-
-                        <></>
                     }
                 </div>
             </div>
