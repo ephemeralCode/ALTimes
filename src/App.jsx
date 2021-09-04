@@ -21,7 +21,7 @@ export default function App() {
     });
 
     const commTimes = [
-        {text: '00:10:00', value: 'COMM_00_10_00'},
+        {text: '00:01:00', value: 'COMM_00_01_00'},
         {text: '00:20:00', value: 'COMM_00_20_00'},
         {text: '00:30:00', value: 'COMM_00_30_00'},
         {text: '01:00:00', value: 'COMM_01_00_00'},

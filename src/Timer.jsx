@@ -20,10 +20,10 @@ export function Timer(props) {
 
     //* timer finishing sound notification
     function tabTitleNotify() {
-        let audio = new Audio('media/notify.mp3');
-
-        audio.volume = 0.3;
-        audio.play();
+        let audio = new Audio();
+        audio.src = 'music/notify.mp3'
+        audio.volume = 0.3
+        audio.play()
     }
 
     //* scrollTimer
