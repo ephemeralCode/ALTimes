@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState, useEffect, useRef } from "react";
+import soundNotify from '../src/music/soundNotify.mp3';
 
 export function Timer(props) {
     const didMount = useRef(false)
@@ -20,8 +21,7 @@ export function Timer(props) {
 
     //* timer finishing sound notification
     function tabTitleNotify() {
-        let audio = new Audio();
-        audio.src = 'music/notify.mp3'
+        let audio = new Audio(soundNotify)
         audio.volume = 0.3
         audio.play()
     }
