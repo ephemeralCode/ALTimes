@@ -3,6 +3,8 @@ import { useState, useEffect, useRef } from "react";
 import soundNotify from '../src/music/soundNotify.mp3';
 
 export function Timer(props) {
+    const [hide, setHide] = useState(false)
+
     const didMount = useRef(false)
     const [time, setTime] = useState('Select time')
     const [startTimer, setStartTimer] = useState(props.isActive)
@@ -16,14 +18,30 @@ export function Timer(props) {
         seconds: '00'
     })
 
+    const audio = new Audio(soundNotify)
+    const showTitle = ['Timer completed!', document.title];
+    const showIcon = ['/altimes/timer.ico', '/altimes/favicon.ico']
     const zeroLength = 2;
     const interval = useRef();
+    const intervalNotify = useRef();
 
     //* timer finishing sound notification
-    function tabTitleNotify() {
-        let audio = new Audio(soundNotify)
+    const tabSoundNotify = () => {
         audio.volume = 0.3
         audio.play()
+    }
+
+    //* 
+    const tabBlinkeNotify = () => {
+        let i = 0;
+
+        window.focus();
+    
+        intervalNotify.current = setInterval(() => {  
+            i++        
+            document.title = showTitle[i % 2]
+            document.head.children[1].attributes[1].value = showIcon[i % 2]
+        }, 1000);
     }
 
     //* scrollTimer
@@ -147,7 +165,8 @@ export function Timer(props) {
                         true
                     )
 
-                    tabTitleNotify()
+                    tabSoundNotify()
+                    tabBlinkeNotify()
                 }
             }, 1000)
 
@@ -158,105 +177,117 @@ export function Timer(props) {
     }, [startTimer])
 
     return (
-            <div className='containerTimer'>
-                <div className='conteinerTimerStart'>
-                    {
-                        props.timerFinish &&
-                            <button className='completedTimerBtn' onClick={() => {
-                                clearInterval(interval.current)
-                                didMount.current = false
-                                removeTime()
-                            }}></button>
-                    }
+            <div className='wrapperTimerAnimation'>
+                <div className='timerСreateAnimation'></div>
 
-                    {
-                        !props.timerFinish && 
-                            <button className='removeTimerBtn' onClick={() => {
-                                clearInterval(interval.current)
-                                didMount.current = false
-                                removeTime()
-                            }}></button>
-                    }
+                <div className={`containerTimer ${hide ? 'hide' : ''}`}> 
+                    <div className='conteinerTimerStart'>
+                        {
+                            props.timerFinish &&
+                                <button className='completedTimerBtn' onClick={() => {
+                                    clearInterval(interval.current)
+                                    clearInterval(intervalNotify.current)
+                                    didMount.current = false
+                                    removeTime()
+                                    window.blur()
+                                    document.title = showTitle[1];
+                                    document.head.children[1].attributes[1].value = showIcon[1]
+                                }}></button>
+                        }
 
-                    <div className='timer'>
-                        <p className='time'>{`
-                            ${String(remainingTime.hours).padStart(zeroLength, '0')}:${String(remainingTime.minutes).padStart(zeroLength, '0')}:${String(remainingTime.seconds).padStart(zeroLength, '0')}
-                        `}</p>
-                        
-                        <div className='containerCompletedTimerText'>
-                            <p className='completedTimerText'>Completed: </p>
-                            <p>{props.time.completedTime}</p>
+                        {
+                            !props.timerFinish && 
+                                <button className='removeTimerBtn' onClick={() => {
+                                    setTimeout(() => {
+                                        clearInterval(interval.current)
+                                        didMount.current = false
+                                        removeTime()
+                                    }, 600)
+                                    
+                                    setHide(true)
+                                }}></button>
+                        }
+
+                        <div className='timer'>
+                            <p className='time'>{`
+                                ${String(remainingTime.hours).padStart(zeroLength, '0')}:${String(remainingTime.minutes).padStart(zeroLength, '0')}:${String(remainingTime.seconds).padStart(zeroLength, '0')}
+                            `}</p>
+                            
+                            <div className='containerCompletedTimerText'>
+                                <p className='completedTimerText'>Completed: </p>
+                                <p>{props.time.completedTime}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div className='containerTimerEnd'>
-                    { 
-                        !props.timerFinish ?
-                            !startTimer ? 
-                                !props.isActive &&
-                                    <div className='containerTimerSelect'>
-                                        {/* select times */}   
-                                        <select 
-                                            className='timerSelect'
-                                            onWheel={(e) => scrollHandler(e)}
-                                            onClick={(e) => {
-                                                if(e.target.options){
-                                                    setTime(e.target.options[e.target.selectedIndex].value)
-                                                    return
-                                                }
-                                                setTime(e.target.value)
-                                            }}
-                                        > 
+                    <div className='containerTimerEnd'>
+                        { 
+                            !props.timerFinish ?
+                                !startTimer ? 
+                                    !props.isActive &&
+                                        <div className='containerTimerSelect'>
+                                            {/* select times */}   
+                                            <select 
+                                                className='timerSelect'
+                                                onWheel={(e) => scrollHandler(e)}
+                                                onClick={(e) => {
+                                                    if(e.target.options){
+                                                        setTime(e.target.options[e.target.selectedIndex].value)
+                                                        return
+                                                    }
+                                                    setTime(e.target.value)
+                                                }}
+                                            > 
 
-                                            <option>Select time</option>
-                                            {
-                                                props.collectionTimes.map((item, i) => {
-                                                    return <option key={i} value={item.value}>{item.text}</option>
-                                                })
-                                            }  
-                                        </select>
-                                        
-                                        {/* start btn */}
-                                        <button 
-                                            style={time === 'Select time' ? {cursor: 'not-allowed', opacity: '50%'} : {cursor: 'pointer'}}
-                                            className='startTimerBtn' 
-                                            disabled={time === 'Select time' ? true : false} 
-                                            onClick={() => {
-                                                setFinishingTime(new Date())
-                                                setStartTimer(true)
-                                                didMount.current = true
-                                            }}
-                                        ></button>
-                                    </div>
+                                                <option>Select time</option>
+                                                {
+                                                    props.collectionTimes.map((item, i) => {
+                                                        return <option key={i} value={item.value}>{item.text}</option>
+                                                    })
+                                                }  
+                                            </select>
+                                            
+                                            {/* start btn */}
+                                            <button 
+                                                style={time === 'Select time' ? {cursor: 'not-allowed', opacity: '50%'} : {cursor: 'pointer'}}
+                                                className='startTimerBtn' 
+                                                disabled={time === 'Select time' ? true : false} 
+                                                onClick={() => {
+                                                    setFinishingTime(new Date())
+                                                    setStartTimer(true)
+                                                    didMount.current = true
+                                                }}
+                                            ></button>
+                                        </div>
+
+                                :
+
+                                <></>   
 
                             :
 
-                            <></>   
+                            <></>
+                        }
 
-                        :
-
-                        <></>
-                    }
-
-                    {
-                        props.isActive &&
-                            <button className='cancelTimerBtn' onClick={() => {
-                                clearInterval(interval.current)
-                                setStartTimer(false)
-                                didMount.current = false
-                                setTime('Select time')
-                                setRemainingTime((prev) => {
-                                    return {
-                                        ...prev,
-                                        hours: '00',
-                                        minutes: '00',
-                                        seconds: '00'
-                                    }
-                                })
-                                saveChanges(null, '00:00:00', false, false)
-                            }}></button>
-                    }
+                        {
+                            props.isActive &&
+                                <button className='cancelTimerBtn' onClick={() => {
+                                    clearInterval(interval.current)
+                                    setStartTimer(false)
+                                    didMount.current = false
+                                    setTime('Select time')
+                                    setRemainingTime((prev) => {
+                                        return {
+                                            ...prev,
+                                            hours: '00',
+                                            minutes: '00',
+                                            seconds: '00'
+                                        }
+                                    })
+                                    saveChanges(null, '00:00:00', false, false)
+                                }}></button>
+                        }
+                    </div>
                 </div>
             </div>
     )

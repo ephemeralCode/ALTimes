@@ -75,6 +75,7 @@ body{
     backdrop-filter: blur(10px);
 
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .containerTimers{
@@ -83,10 +84,6 @@ body{
 
 .containerTimers + .containerTimers{
     margin-top: 40px;
-}
-
-.containerTimer:last-child{
-    margin-bottom: 20px;
 }
 
 .containerTitle{
@@ -176,14 +173,99 @@ body{
 }
 
 /*! timer.jsx !*/
+
+.wrapperTimerAnimation{
+    position: relative;
+}
+
+.wrapperTimerAnimation:last-child{
+    margin-bottom: 20px;
+}
+
+.timerСreateAnimation{
+    position: absolute;
+    z-index: 99;
+
+    animation: frontCreateTimer 1s ease-in-out;
+}
+
+@keyframes frontCreateTimer {
+    0% {
+        top: 0;
+        left: 0;
+
+        width: 0;
+        height: 100%;
+
+        background: #FAE600;
+    }
+
+    50% {
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 100%;
+
+        background: #FAE600;
+    }
+
+    100% {
+        top: 0;
+        left: 100%;
+
+        width: 0;
+        height: 100%;
+
+        background: #FAE600;
+    }
+}
+
 .containerTimer{
+    position: relative;
     display: flex;
     margin: 8px 0;
-    
+
     border-bottom: 1px solid #FAE600;
 
     background: rgba(63, 63, 63, 0.6);
-    color: rgb(240, 240, 240)
+    color: rgb(240, 240, 240);
+
+    animation: createTimer 2s ease-in-out;
+}
+
+@keyframes createTimer {
+    0% {
+        opacity: 0;
+    }
+
+    25% {
+        opacity: 0;
+    }
+
+    26% {
+        opacity: 1;
+    }
+}
+
+.hide{
+    /* transition: .5s ease-in-out;
+    transform: translate(50%, 0);
+    opacity: 0; */
+
+    animation: delAnim 0.5s forwards;
+}
+
+@keyframes delAnim {
+    0% {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(100px, 0);
+    }
 }
 
 .conteinerTimerStart{
@@ -220,7 +302,7 @@ body{
 }
 
 .timer{
-    padding: 20px 0;
+    padding: 25px 0 20px;
     margin: auto;
 }
 
@@ -238,8 +320,8 @@ body{
     content: '┐';
     position: absolute;
 
-    left: 165px;
-    top: -25px;
+    left: 167px;
+    top: -29px;
 
     color: #FAE600;
 }
