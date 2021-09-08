@@ -44,6 +44,16 @@ export function Timer(props) {
     }
 
     //* scrollTimer
+    function stopScroll(elem){
+        elem.onwheel = (e) => {
+            e.preventDefault()
+        }
+    }
+
+    function resumeScroll(elem){
+        elem.onwheel = () => {}
+    }
+
     const scrollHandler = (e) => {
         if(e.deltaY < 0){
             if(e.target.options.selectedIndex !== 0) {
@@ -229,6 +239,8 @@ export function Timer(props) {
                                             <select 
                                                 className='timerSelect'
                                                 onWheel={(e) => scrollHandler(e)}
+                                                onMouseEnter={() => stopScroll(document.querySelector('.container'))}
+                                                onMouseLeave={() => resumeScroll(document.querySelector('.container'))}
                                                 onClick={(e) => {
                                                     if(e.target.options){
                                                         setTime(e.target.options[e.target.selectedIndex].value)
