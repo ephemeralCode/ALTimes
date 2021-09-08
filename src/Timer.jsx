@@ -3,9 +3,8 @@ import { useState, useEffect, useRef } from "react";
 import soundNotify from '../src/music/soundNotify.mp3';
 
 export function Timer(props) {
-    const [hide, setHide] = useState(false)
-
     const didMount = useRef(false)
+    const [animationRemove, setAnimationRemove] = useState(false)
     const [time, setTime] = useState('Select time')
     const [startTimer, setStartTimer] = useState(props.isActive)
     const [finishingTime, setFinishingTime] = useState(
@@ -19,11 +18,11 @@ export function Timer(props) {
     })
 
     const audio = new Audio(soundNotify)
-    const showTitle = ['Timer completed!', document.title];
+    const showTitle = ['Timer completed!', document.title]
     const showIcon = ['/altimes/timer.ico', '/altimes/favicon.ico']
-    const zeroLength = 2;
-    const interval = useRef();
-    const intervalNotify = useRef();
+    const zeroLength = 2
+    const interval = useRef()
+    const intervalNotify = useRef()
 
     //* timer finishing sound notification
     const tabSoundNotify = () => {
@@ -33,7 +32,7 @@ export function Timer(props) {
 
     //* 
     const tabBlinkeNotify = () => {
-        let i = 0;
+        let i = 0
 
         window.focus();
     
@@ -180,7 +179,7 @@ export function Timer(props) {
             <div className='wrapperTimerAnimation'>
                 <div className='timerСreateAnimation'></div>
 
-                <div className={`containerTimer ${hide ? 'hide' : ''}`}> 
+                <div className={`containerTimer ${animationRemove ? 'animationTimerRemove' : ''}`}> 
                     <div className='conteinerTimerStart'>
                         {
                             props.timerFinish &&
@@ -202,9 +201,9 @@ export function Timer(props) {
                                         clearInterval(interval.current)
                                         didMount.current = false
                                         removeTime()
-                                    }, 600)
+                                    }, 390)
                                     
-                                    setHide(true)
+                                    setAnimationRemove(true)
                                 }}></button>
                         }
 
