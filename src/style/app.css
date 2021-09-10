@@ -165,28 +165,31 @@ body{
 }
 
 .addTimerBtn{
-    width: 100%;
-    background: var(--yellowMain);
-    border: 4px solid var(--yellowMain);
+    display: flex;
+    justify-content: center;
 
     width: 100%;
     height: 32px;
+    align-items: center;
 
-    background-image: url('/src/img/iconAddTimer.png');
-    background-repeat: no-repeat;
-    background-position: center center;
+    background: var(--yellowMain);
+    border: none;
 
     cursor: pointer;
 }
 
 .addTimerBtn:hover{
     background-color: var(--yellowHover);
-    border: 4px solid var(--yellowHover);
     transition: .3s ease-in-out;
 }
 
 .addTimerBtn:not(:hover){
     transition: .3s ease-in-out;
+}
+
+.addTimerBtnImg{
+    width: 27px;
+    height: 27px;
 }
 
 /*! timer.jsx !*/
@@ -310,14 +313,6 @@ body{
     cursor: pointer;
 }
 
-.completedTimerBtn{
-    background-image: url('/src/img/iconComplete.png');
-}
-
-.removeTimerBtn{
-    background-image: url('/src/img/iconRemove.png');
-}
-
 .removeTimerBtn:hover, .cancelTimerBtn:hover, .completedTimerBtn:hover{
     background-color: var(--yellowHover);
     transition: .3s ease-in-out;
@@ -327,12 +322,14 @@ body{
     transition: .3s ease-in-out;
 }
 
-.cancelTimerBtn{
-    background-image: url('/src/img/iconCancel.png');
+.cancelTimerBtnImg, .completedTimerBtnImg, .removeTimerBtnImg{
+    width: 35px;
+    height: 35px;
 }
 
-.startTimerBtn{
-    background-image: url('/src/img/iconStart.png');
+.startTimerBtnBtnImg{
+    width: 23px;
+    height: 23px;
 }
 
 .startTimerBtn:hover:not(:disabled){

@@ -4,6 +4,9 @@ import { Timer } from './Timer';
 import './style/app.css';
 import './style/font.css';
 
+//icon
+import iconAddTimer from './img/icon/iconAddTimer.svg';
+
 export default function App() {
     const amountTimers = 4;
     const [saveLocalTime, setSaveLocalTime] = useState({
@@ -161,7 +164,12 @@ export default function App() {
                                     name='COMM'
                                     className='addTimerBtn' 
                                     onClick={(e) => {setTime(e)}}
-                                ></button>
+                                >
+                                    <img 
+                                        className='addTimerBtnImg' 
+                                        src={iconAddTimer} 
+                                    />
+                                </button>
                                 
                                 <div className='containerTitleAvailable'>
                                     <p className='titleAvailable'>Available:</p><p>{amountTimers - saveLocalTime.COMM.length}</p>
@@ -205,7 +213,12 @@ export default function App() {
                                     name='BOOK'
                                     className='addTimerBtn' 
                                     onClick={(e) => {setTime(e)}}
-                                ></button>
+                                >
+                                    <img 
+                                        className='addTimerBtnImg' 
+                                        src={iconAddTimer} 
+                                    />
+                                </button>
 
                                 <div className='containerTitleAvailable'>
                                     <p className='titleAvailable'>Available:</p><p>{4 - saveLocalTime.BOOK.length}</p>
@@ -249,7 +262,12 @@ export default function App() {
                                     name='PROJ'
                                     className='addTimerBtn' 
                                     onClick={(e) => {setTime(e)}}
-                                ></button>
+                                >
+                                    <img 
+                                        className='addTimerBtnImg' 
+                                        src={iconAddTimer} 
+                                    />
+                                </button>
 
                                 <div className='containerTitleAvailable'>
                                     <p className='titleAvailable'>Available:</p><p>{1 - saveLocalTime.PROJ.length}</p>

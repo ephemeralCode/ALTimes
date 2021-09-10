@@ -2,6 +2,12 @@ import React from 'react';
 import { useState, useEffect, useRef } from "react";
 import soundNotify from '../src/music/soundNotify.mp3';
 
+// icons
+import iconStartTimer from './img/icon/iconStartTimer.svg';
+import iconRemoveTimer from './img/icon/iconRemoveTimer.svg';
+import iconCancelTimer from './img/icon/iconCancelTimer.svg';
+import iconCompleteTimer from './img/icon/iconCompleteTimer.svg';
+
 export function Timer(props) {
     const didMount = useRef(false)
     const [animationRemove, setAnimationRemove] = useState(false)
@@ -194,14 +200,23 @@ export function Timer(props) {
                         {
                             props.timerFinish &&
                                 <button className='completedTimerBtn' onClick={() => {
-                                    clearInterval(interval.current)
-                                    clearInterval(intervalNotify.current)
-                                    didMount.current = false
-                                    removeTime()
-                                    window.blur()
-                                    document.title = showTitle[1];
-                                    document.head.children[1].attributes[1].value = showIcon[1]
-                                }}></button>
+                                    setTimeout(() => {
+                                        clearInterval(interval.current)
+                                        clearInterval(intervalNotify.current)
+                                        didMount.current = false
+                                        removeTime()
+                                        window.blur()
+                                        document.title = showTitle[1];
+                                        document.head.children[1].attributes[1].value = showIcon[1]
+                                    }, 390)
+
+                                    setAnimationRemove(true)
+                                }}>
+                                    <img 
+                                        className='completedTimerBtnImg' 
+                                        src={iconCompleteTimer} 
+                                    />
+                                </button>
                         }
 
                         {
@@ -214,7 +229,12 @@ export function Timer(props) {
                                     }, 390)
                                     
                                     setAnimationRemove(true)
-                                }}></button>
+                                }}>
+                                    <img 
+                                        className='removeTimerBtnImg' 
+                                        src={iconRemoveTimer} 
+                                    />
+                                </button>
                         }
 
                         <div className='timer'>
@@ -268,7 +288,12 @@ export function Timer(props) {
                                                     setStartTimer(true)
                                                     didMount.current = true
                                                 }}
-                                            ></button>
+                                            >
+                                                <img 
+                                                    className='startTimerBtnBtnImg' 
+                                                    src={iconStartTimer} 
+                                                />
+                                            </button>
                                         </div>
 
                                 :
@@ -296,7 +321,12 @@ export function Timer(props) {
                                         }
                                     })
                                     saveChanges(null, '00:00:00', false, false)
-                                }}></button>
+                                }}>
+                                    <img 
+                                        className='cancelTimerBtnImg' 
+                                        src={iconCancelTimer} 
+                                    />
+                                </button>
                         }
                     </div>
                 </div>
