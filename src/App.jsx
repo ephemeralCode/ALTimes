@@ -165,7 +165,8 @@ export default function App() {
                                     className='addTimerBtn' 
                                     onClick={(e) => {setTime(e)}}
                                 >
-                                    <img 
+                                    <img
+                                        name='COMM'
                                         className='addTimerBtnImg' 
                                         src={iconAddTimer} 
                                     />
@@ -215,6 +216,7 @@ export default function App() {
                                     onClick={(e) => {setTime(e)}}
                                 >
                                     <img 
+                                        name='BOOK'
                                         className='addTimerBtnImg' 
                                         src={iconAddTimer} 
                                     />
@@ -263,7 +265,8 @@ export default function App() {
                                     className='addTimerBtn' 
                                     onClick={(e) => {setTime(e)}}
                                 >
-                                    <img 
+                                    <img
+                                        name='PROJ'
                                         className='addTimerBtnImg' 
                                         src={iconAddTimer} 
                                     />
