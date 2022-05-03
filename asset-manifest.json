@@ -1,28 +1,30 @@
 {
   "files": {
-    "main.css": "/altimes/static/css/main.c0f9a290.chunk.css",
-    "main.js": "/altimes/static/js/main.74927308.chunk.js",
-    "main.js.map": "/altimes/static/js/main.74927308.chunk.js.map",
-    "runtime-main.js": "/altimes/static/js/runtime-main.e3dc08fd.js",
-    "runtime-main.js.map": "/altimes/static/js/runtime-main.e3dc08fd.js.map",
-    "static/js/2.1ac5882d.chunk.js": "/altimes/static/js/2.1ac5882d.chunk.js",
-    "static/js/2.1ac5882d.chunk.js.map": "/altimes/static/js/2.1ac5882d.chunk.js.map",
+    "main.css": "/altimes/static/css/main.560a011c.css",
+    "main.js": "/altimes/static/js/main.dd8d998a.js",
+    "static/media/6.mp3": "/altimes/static/media/6.a46ce157ca180b9f6c51.mp3",
+    "static/media/SFProDisplaySemibold.woff": "/altimes/static/media/SFProDisplaySemibold.340c3a1a6dddb0b99476.woff",
+    "static/media/SFProDisplayRegular.woff": "/altimes/static/media/SFProDisplayRegular.7ee14c637e39445d7093.woff",
+    "static/media/4.mp3": "/altimes/static/media/4.2b660e2671808ec0f253.mp3",
+    "static/media/SFProDisplaySemibold.woff2": "/altimes/static/media/SFProDisplaySemibold.3926eb65ce4420a81930.woff2",
+    "static/media/SFProDisplayRegular.woff2": "/altimes/static/media/SFProDisplayRegular.d5ff9f6824d2c6607361.woff2",
+    "static/media/2.mp3": "/altimes/static/media/2.4c1cda15afd84d083034.mp3",
+    "static/media/BG.webp": "/altimes/static/media/BG.63cfed5b3c42ea811e63.webp",
+    "static/media/5.mp3": "/altimes/static/media/5.81bf8f8c01f09cfe6e00.mp3",
+    "static/media/1.mp3": "/altimes/static/media/1.40c2f6729b00cad9c293.mp3",
+    "static/media/7.mp3": "/altimes/static/media/7.1df0ad34a80721f519ec.mp3",
+    "static/media/3.mp3": "/altimes/static/media/3.007408f4ce76d6880f4c.mp3",
+    "static/media/iconAddTimer.svg": "/altimes/static/media/iconAddTimer.7aa5c544af33b0cb468f2c49d7187c89.svg",
+    "static/media/iconRemoveTimer.svg": "/altimes/static/media/iconRemoveTimer.3f8f7c62296949dc7243574aef2d42a6.svg",
     "index.html": "/altimes/index.html",
-    "static/css/main.c0f9a290.chunk.css.map": "/altimes/static/css/main.c0f9a290.chunk.css.map",
-    "static/js/2.1ac5882d.chunk.js.LICENSE.txt": "/altimes/static/js/2.1ac5882d.chunk.js.LICENSE.txt",
-    "static/media/app.css": "/altimes/static/media/BG.4cc72418.png",
-    "static/media/font.css": "/altimes/static/media/SFProDisplaySemibold.3926eb65.woff2",
-    "static/media/iconAddTimer.7aa5c544.svg": "/altimes/static/media/iconAddTimer.7aa5c544.svg",
-    "static/media/iconCancelTimer.e56c4250.svg": "/altimes/static/media/iconCancelTimer.e56c4250.svg",
-    "static/media/iconCompleteTimer.7af02aed.svg": "/altimes/static/media/iconCompleteTimer.7af02aed.svg",
-    "static/media/iconRemoveTimer.3f8f7c62.svg": "/altimes/static/media/iconRemoveTimer.3f8f7c62.svg",
-    "static/media/iconStartTimer.20b99de3.svg": "/altimes/static/media/iconStartTimer.20b99de3.svg",
-    "static/media/soundNotify.40c2f672.mp3": "/altimes/static/media/soundNotify.40c2f672.mp3"
+    "static/media/iconCompleteTimer.svg": "/altimes/static/media/iconCompleteTimer.7af02aedb4d3d347e2ff932020348954.svg",
+    "static/media/iconCancelTimer.svg": "/altimes/static/media/iconCancelTimer.e56c42500776133f5929d33ad77bb0b1.svg",
+    "static/media/iconStartTimer.svg": "/altimes/static/media/iconStartTimer.20b99de3c51e0ed843544b8c7a0180cc.svg",
+    "main.560a011c.css.map": "/altimes/static/css/main.560a011c.css.map",
+    "main.dd8d998a.js.map": "/altimes/static/js/main.dd8d998a.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.e3dc08fd.js",
-    "static/js/2.1ac5882d.chunk.js",
-    "static/css/main.c0f9a290.chunk.css",
-    "static/js/main.74927308.chunk.js"
+    "static/css/main.560a011c.css",
+    "static/js/main.dd8d998a.js"
   ]
 }
