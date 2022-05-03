@@ -1,0 +1,108 @@
+/*! TimerCreater !*/
+.TimerCreater-wrapperTimers{
+    padding: 10px 20px 20px;
+}
+
+.TimerCreater-availableTimerText{
+    text-align: center;
+
+    padding: 20px 0 0;
+
+    font-size: 20px;
+    color: #444444;
+}
+
+.TimerCreater-btnCreateTimer{
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+
+    width: 100%;
+    height: 0;
+    align-items: center;
+
+    background: var(--yellowMain);
+    border: none;
+
+    cursor: pointer;
+    overflow: hidden;
+
+    transition: all .5s ease-in-out;
+}
+
+.TimerCreater-btnCreateTimer:hover {
+    background: var(--yellowHover);
+}
+
+.btnCreateTimerAnimationCreate{
+    animation: btnCreateTimerAnimationCreate .3s linear forwards .2s;
+}
+
+.btnCreateTimerAnimationRemove{
+    animation: btnCreateTimerAnimationRemove .3s linear forwards;
+}
+
+@keyframes btnCreateTimerAnimationCreate {
+    0% {
+        height: 0;
+    }
+
+    100% {
+
+        height: 30px;
+    }
+}
+
+@keyframes btnCreateTimerAnimationRemove {
+    0% {
+        height: 30px;
+    }
+
+    100% {
+
+        height: 0;
+    }
+}
+
+.TimerCreater-containerLabelAvailableTimers{
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    display: flex;
+
+    padding: 6px 20px 7px 70px;
+
+    background: #3F3F3F;
+    color: var(--whiteMain);
+
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 30% 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 30% 100%);
+}
+
+.TimerCreater-btnCreateTimer::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 116px;
+
+    width: 65px;
+    height: 32px;
+
+    background: #3F3F3F;
+
+    -webkit-clip-path: polygon(0 0, 70% 0, 100% 100%, 70% 100%);
+    clip-path: polygon(0 0, 20% 0, 100% 100%, 80% 100%);
+}
+
+.TimerCreater-labelAvailableTimers{
+    margin: 0 10px 0 0;
+
+    color: var(--yellowMain);
+}
+
+.TimerCreater-addTimerBtnImg{
+    width: 27px;
+    height: 27px;
+}

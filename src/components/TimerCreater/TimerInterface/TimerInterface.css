@@ -1,0 +1,238 @@
+/*! TimerInterface !*/
+.TimerInterface-containerAnimationTimer {
+    position: relative;
+}
+
+.TimerInterface-containerTimer {
+    display: flex;
+    margin: 10px 0 0;
+    height: 112px;
+
+    border-bottom: 1px solid var(--yellowMain);
+
+    background: rgba(63, 63, 63, 0.6);
+    color: var(--whiteMain);
+
+    animation: animationCreationTimer .7s linear;
+}
+
+@keyframes animationCreationTimer {
+    0% {
+        opacity: 0;
+        height: 0;
+    }
+
+    50% {
+        opacity: 0;
+        height: 112px;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.TimerInterface-animationTimerRemove {
+    animation: 
+        animationTimerRemoveOpacity .3s ease-in-out,
+        animationTimerRemoveSize .4s ease-in-out .2s
+    ;
+}
+
+@keyframes animationTimerRemoveOpacity {
+    0% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    60% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(300px);
+    }
+}
+
+@keyframes animationTimerRemoveSize {
+    0% {
+        opacity: 0;
+        height: 112px;
+    }
+
+    100% {
+        opacity: 0;
+        height: 0;
+        margin: -10px 0 0 0;
+        border-bottom: none;
+    }
+}
+
+.TimerInterface-timerСreateAnimation {
+    position: absolute;
+    z-index: 99;
+
+    animation: foregroundTimerCreation .7s ease-in-out;
+}
+
+@keyframes foregroundTimerCreation {
+    0% {
+        top: 0;
+        left: 0;
+
+        width: 0;
+        height: 100%;
+
+        background: var(--yellowMain);
+    }
+
+    50% {
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 100%;
+
+        background: var(--yellowMain);
+    }
+
+    100% {
+        top: 0;
+        left: 100%;
+
+        width: 0;
+        height: 100%;
+
+        background: var(--yellowMain);
+    }
+}
+
+.TimerInterface-conteinerTimerStart {
+    display: flex;
+
+    flex-basis: 55%;
+}
+
+.TimerInterface-timer {
+    padding: 25px 0 20px;
+    margin: auto;
+}
+
+.TimerInterface-time {
+    position: relative;
+    display: flex;
+    justify-content: center;
+
+    width: 165px;
+
+    font-size: 38px;
+}
+
+.TimerInterface-time::before {
+    content: '┐';
+    position: absolute;
+
+    left: 167px;
+    top: -29px;
+
+    color: var(--yellowMain);
+}
+
+.TimerInterface-time::after {
+    content: '└';
+    position: absolute;
+
+    left: -28px;
+    bottom: -25px;
+
+    color: var(--yellowMain);
+}
+
+.TimerInterface-containerCompletedTimer {
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+
+    font-size: 14px;
+}
+
+.TimerInterface-completedTimerText {
+    margin-right: 5px;
+
+    color: var(--yellowMain);
+}
+
+.TimerInterface-containerTimerEnd {
+    display: flex;
+    justify-content: flex-end;
+    flex-basis: 45%;
+}
+
+.TimerInterface-containerTimerSelect {
+    display: flex;
+    justify-content: space-between;
+
+    width: 100%;
+    height: 100%;
+}
+
+.TimerInterface-timerSelect {
+    align-self: center;
+
+    width: 120px;
+    height: 40px;
+
+    padding: 0 0 0 10px;
+    margin: auto;
+
+    background: #202020;
+    border: 1px solid var(--yellowMain);
+
+    color: var(--whiteMain);
+    font-size: 16px;
+
+    outline: none;
+    cursor: pointer;
+}
+
+/* TimerInterface btns */
+
+.TimerInterface-completedTimerBtn, .TimerInterface-removeTimerBtn, .TimerInterface-startTimerBtn, .TimerInterface-cancelTimerBtn{
+    background: var(--yellowMain);
+    background-repeat: no-repeat;
+    background-position: center center;
+
+    width: 50px;
+
+    border: none;
+    cursor: pointer;
+}
+
+.TimerInterface-removeTimerBtn:hover, .TimerInterface-cancelTimerBtn:hover, .TimerInterface-completedTimerBtn:hover{
+    background-color: var(--yellowHover);
+    transition: .3s ease-in-out;
+}
+
+.TimerInterface-removeTimerBtn:not(:hover), .TimerInterface-cancelTimerBtn:not(:hover), .TimerInterface-completedTimerBtn:not(:hover){
+    transition: .3s ease-in-out;
+}
+
+.TimerInterface-cancelTimerBtnImg, .TimerInterface-completedTimerBtnImg, .TimerInterface-removeTimerBtnImg{
+    width: 35px;
+    height: 35px;
+}
+
+.TimerInterface-startTimerBtnImg{
+    width: 23px;
+    height: 23px;
+}
+
+.TimerInterface-startTimerBtn:hover:not(:disabled){
+    background-color: var(--yellowHover);
+    transition: .3s ease-in-out;
+}
+
+.TimerInterface-startTimerBtn:not(:hover){
+    transition: .3s ease-in-out;
+}

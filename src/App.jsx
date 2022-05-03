@@ -1,28 +1,25 @@
-import React from 'react';
-import { useState, useEffect } from "react";
-import { Timer } from './Timer';
-import './style/app.css';
-import './style/font.css';
+import { React, useState, useEffect, useRef } from 'react';
 
-//icon
-import iconAddTimer from './img/icon/iconAddTimer.svg';
+// components
+import { TimerCreater } from './components/TimerCreater/TimerCreater';
+import { UserMenu } from './components/UserMenu/UserMenu';
 
-export default function App() {
-    const amountTimers = 4;
-    const [saveLocalTime, setSaveLocalTime] = useState({
-        COMM: [
-            
-        ],
+// styles
+import './style/App.css';
 
-        BOOK: [
+// fonts
+import './style/fonts.css'
 
-        ],
+// sounds 
+import soundNotify1 from '../src/music/1.mp3';
+import soundNotify2 from '../src/music/2.mp3';
+import soundNotify3 from '../src/music/3.mp3';
+import soundNotify4 from '../src/music/4.mp3';
+import soundNotify5 from '../src/music/5.mp3';
+import soundNotify6 from '../src/music/6.mp3';
+import shipGirlsVoice from '../src/music/7.mp3';
 
-        PROJ: [
-
-        ]
-    });
-
+export function App() {
     const commTimes = [
         {text: '00:01:00', value: 'COMM_00_01_00'},
         {text: '00:20:00', value: 'COMM_00_20_00'},
@@ -45,15 +42,13 @@ export default function App() {
         {text: '06:00:00', value: 'COMM_06_00_00'},
         {text: '08:00:00', value: 'COMM_08_00_00'},
         {text: '09:00:00', value: 'COMM_09_00_00'},
-        {text: '10:00:00', value: 'COMM_10_00_00'},
+        {text: '10:00:00', value: 'COMM_10_00_00'}
     ]
-
     const bookTimes = [
         {text: '02:00:00', value: 'BOOK_02_00_00'},
         {text: '04:00:00', value: 'BOOK_04_00_00'},
-        {text: '08:00:00', value: 'BOOK_08_00_00'},
+        {text: '08:00:00', value: 'BOOK_08_00_00'}
     ]
-    
     const projTimes = [
         {text: '00:30:00', value: 'PROJ_00_30_00'},
         {text: '01:00:00', value: 'PROJ_01_00_00'},
@@ -67,229 +62,220 @@ export default function App() {
         {text: '08:00:00', value: 'PROJ_08_00_00'},
         {text: '09:00:00', value: 'PROJ_09_00_00'},
         {text: '10:00:00', value: 'PROJ_10_00_00'},
-        {text: '12:00:00', value: 'PROJ_10_00_00'},  
+        {text: '12:00:00', value: 'PROJ_10_00_00'}
+    ]
+    const collectionSoundNotify = [
+        {text: 'Sound 1', value: soundNotify1},
+        {text: 'Sound 2', value: soundNotify2},
+        {text: 'Sound 3', value: soundNotify3},
+        {text: 'Sound 4', value: soundNotify4},
+        {text: 'Sound 5', value: soundNotify5},
+        {text: 'Sound 6', value: soundNotify6},
+        {text: `Ship girl's voice`, value: shipGirlsVoice}
     ]
 
-    // проверка и создание LC
+    const [saveLocalTime, setSaveLocalTime] = useState({COMM:[], BOOK:[], PROJ:[]})
+    const [toggleUserMenu, setToggleUserMenu] = useState(false)
+    const [toggleSoundNotify, setToggleSoundNotify] = useState(
+        localStorage.USER_SETTINGS ? 
+            JSON.parse(localStorage.USER_SETTINGS).soundNotify
+            : 
+            true
+    )
+    const [soundNotify, setSoundNotify] = useState(
+        localStorage.USER_SETTINGS ? 
+            new Audio(JSON.parse(localStorage.USER_SETTINGS).music) 
+            : 
+            new Audio(soundNotify1)
+    )
+    const [volumeSoundNotify, setVolumeSoundNotify] = useState(
+        localStorage.USER_SETTINGS ? 
+            JSON.parse(localStorage.USER_SETTINGS).volume
+            : 
+            '5'
+    )
+
+    const currentPlayingSound = useRef(soundNotify)
+    const controlSoundNotify = useRef(false)
+    const intervalAgentControl = useRef()
+  
+    //* LC check
     if (!localStorage.getItem('USER_TIME')) {
-        localStorage.setItem('USER_TIME', (JSON.stringify({COMM:[], BOOK:[], PROJ:[]})));
+        localStorage.setItem('USER_TIME', (JSON.stringify({COMM:[], BOOK:[], PROJ:[]})))
     }
 
+    if (!localStorage.USER_SETTINGS) {
+        localStorage.setItem('USER_SETTINGS', JSON.stringify({
+            soundNotify: true,
+            music: collectionSoundNotify[0].value,
+            volume: '5'
+        }))
+    }
+
+    //* load LC
     useEffect(() => {
-        let arrayTimes = JSON.parse(localStorage.getItem('USER_TIME'))
+        const arrayTimes = JSON.parse(localStorage.USER_TIME)
 
         if(arrayTimes.COMM.length || arrayTimes.BOOK.length || arrayTimes.PROJ.length) {
-            setSaveLocalTime(() => {return arrayTimes})
+            setSaveLocalTime(() => {
+                return arrayTimes
+            })
         }
+  
     }, [0])
 
-    // создание таймера
-    const setTime = (e) => {
-        let typeTimer = e.target.name
-        let arrayTimes = JSON.parse(localStorage.getItem('USER_TIME'))
+    //* notify
+    const tabSoundNotify = (toggleSoundNotify, soundNotify, volumeSoundNotify) => {
+        if (toggleSoundNotify) {
+            // clearing prev sound
+            currentPlayingSound.current.pause()
+            currentPlayingSound.current.currentTime = 0
+            currentPlayingSound.current = soundNotify
 
-        // сохранение в хук созданного таймера
-        setSaveLocalTime((prev) => {
-            return {
-                ...prev, 
-                [typeTimer]: [
-                    ...prev[typeTimer], {
-                        id: prev[typeTimer].length ? 
-                                prev[typeTimer][prev[typeTimer].length - 1].id + 1 : 0,
-                        savedDate: null,
-                        completedTime: '00:00:00',
-                        isActive: false,
-                        timerFinish: false
-                    }
-                ],
-            }
-        })
+            // add new sound
+            currentPlayingSound.current.volume = volumeSoundNotify / 10
+            currentPlayingSound.current.play()
+        }
+    }
 
-        // сохранение в LC таймера
-        setSaveLocalTime((prev) => {
-            arrayTimes[typeTimer].push({
-                id: prev[typeTimer][prev[typeTimer].length - 1].id,
-                savedDate: null,
-                completedTime: '00:00:00',
-                isActive: false,
-                timerFinish: false
-            })
-    
-            localStorage.USER_TIME = JSON.stringify(arrayTimes)
+    //* manager notify
+    const agentSoundNotify = () => {
+        const music = soundNotify
+        const volume = volumeSoundNotify
+        
+        if (!controlSoundNotify.current) {
+            controlSoundNotify.current = true
 
-            return prev
-        })     
+            tabSoundNotify(
+                toggleSoundNotify, 
+                music, 
+                volume
+            )
+
+            intervalAgentControl.current = setInterval(() => {
+                controlSoundNotify.current = false
+
+                clearInterval(intervalAgentControl.current)
+            }, 10 * 1000)
+        } 
     }
 
     return (
         <>
-            <div className='containerBgTitle'>
-                <p className='bgTitle'>ALTimes </p>
-                <p className='ver'>v. 0.1</p>
+            {/* menu */}
+            <div className={`Main-containerUserMenu ${toggleUserMenu ? 'Main-activeUserMenu' : ''}`}>
+                <UserMenu
+                    collectionSoundNotify={collectionSoundNotify}
+                    toggleSoundNotify={toggleSoundNotify}
+                    setToggleSoundNotify={setToggleSoundNotify}
+                    tabSoundNotify={tabSoundNotify}
+                    soundNotify={soundNotify}
+                    setSoundNotify={setSoundNotify}
+                    volumeSoundNotify={volumeSoundNotify}
+                    setVolumeSoundNotify={setVolumeSoundNotify}
+
+                    setSaveLocalTime={setSaveLocalTime}
+                />
             </div>
 
-            <div className='container'>
-                {/*  COMM */}
-                <fieldset className='containerTimers'>
-                    <legend className='containerTitle'>
-                        <p className='commissionTitle'>COMMISSION</p>
-                    </legend>
-                    
-                    <div className='wrapperTimer'>
-                        {
-                            saveLocalTime.COMM.length ? 
-                                saveLocalTime.COMM.map((item, i) => { 
-                                    return <Timer 
-                                    time={item}
-                                    key={item.id}
-                                    id={i}
-                                    setSaveLocalTime={setSaveLocalTime}
-                                    collectionTimes={commTimes}
-                                    typeTimer={'COMM'}
-                                    isActive={item.isActive}
-                                    timerFinish={item.timerFinish}
-                                    />
-                                })
-                            
-                                : 
-                            
-                                <div className='availableTimerText'>Not found</div>
-                        }
-                    </div>
-                    
-                    {
-                        saveLocalTime.COMM.length !== amountTimers && 
-                            <div className='containerAddTimerBtn'>
-                                <button 
-                                    name='COMM'
-                                    className='addTimerBtn' 
-                                    onClick={(e) => {setTime(e)}}
-                                >
-                                    <img
-                                        name='COMM'
-                                        className='addTimerBtnImg' 
-                                        src={iconAddTimer} 
-                                    />
-                                </button>
-                                
-                                <div className='containerTitleAvailable'>
-                                    <p className='titleAvailable'>Available:</p><p>{amountTimers - saveLocalTime.COMM.length}</p>
-                                </div>
-                            </div>
-                    }
-                </fieldset>
-
-                {/* BOOK */}
-                <fieldset className='containerTimers'>
-                    <legend className='containerTitle'>
-                        <p>CLASSROOM</p>
-                    </legend>
-                    
-                    <div className='wrapperTimer'>
-                        {
-                            saveLocalTime.BOOK.length ? 
-                                saveLocalTime.BOOK.map((item, i) => {
-                                    return <Timer 
-                                        time={item}
-                                        key={item.id}
-                                        id={i}
-                                        setSaveLocalTime={setSaveLocalTime}
-                                        collectionTimes={bookTimes}
-                                        typeTimer={'BOOK'}
-                                        isActive={item.isActive}
-                                        timerFinish={item.timerFinish}
-                                    />
-                                })
-                            
-                                : 
-                            
-                                <div className='availableTimerText'>Not found</div>
-                        }
-                    </div>
-                    
-                    {
-                        saveLocalTime.BOOK.length !== 4 && 
-                            <div className='containerAddTimerBtn'>
-                                <button 
-                                    name='BOOK'
-                                    className='addTimerBtn' 
-                                    onClick={(e) => {setTime(e)}}
-                                >
-                                    <img 
-                                        name='BOOK'
-                                        className='addTimerBtnImg' 
-                                        src={iconAddTimer} 
-                                    />
-                                </button>
-
-                                <div className='containerTitleAvailable'>
-                                    <p className='titleAvailable'>Available:</p><p>{4 - saveLocalTime.BOOK.length}</p>
-                                </div>
-                            </div>
-                    }
-                </fieldset>
-
-                {/* PROJ */}
-                <fieldset className='containerTimers'>
-                    <legend className='containerTitle'>
-                        <p>LAB</p>
-                    </legend>
-                    
-                    <div className='wrapperTimer'>
-                        {
-                            saveLocalTime.PROJ.length ? 
-                                saveLocalTime.PROJ.map((item, i) => {
-                                    return <Timer 
-                                        time={item}
-                                        key={item.id}
-                                        id={i}
-                                        setSaveLocalTime={setSaveLocalTime}
-                                        collectionTimes={projTimes}
-                                        typeTimer={'PROJ'}
-                                        isActive={item.isActive}
-                                        timerFinish={item.timerFinish}
-                                    />
-                                })
-                            
-                                : 
-                            
-                                <div className='availableTimerText'>Not found</div>
-                        }
-                    </div>
-                    
-                    {
-                        saveLocalTime.PROJ.length !== 1 &&
-                            <div className='containerAddTimerBtn'>
-                                <button 
-                                    name='PROJ'
-                                    className='addTimerBtn' 
-                                    onClick={(e) => {setTime(e)}}
-                                >
-                                    <img
-                                        name='PROJ'
-                                        className='addTimerBtnImg' 
-                                        src={iconAddTimer} 
-                                    />
-                                </button>
-
-                                <div className='containerTitleAvailable'>
-                                    <p className='titleAvailable'>Available:</p><p>{1 - saveLocalTime.PROJ.length}</p>
-                                </div>
-                            </div>
-                    }
-                </fieldset>
-
-                {/* <div>
-    
-                    <br/>
-                    <button onClick = {() => {
-                        localStorage.clear()
-                        localStorage.setItem('USER_TIME', (JSON.stringify({COMM:[], BOOK:[], PROJ:[]})));
+            <div className='Main-containerBtnsUserMenu'>
+                <button 
+                    className={`Main-containerBtnArrow ${toggleUserMenu ? 'Main-activeUserMenu' : ''}`}
+                    style={toggleUserMenu ? {zIndex: -1} : {zIndex: 1}}
+                    onClick={() => {
+                        setToggleUserMenu(true)
                     }}
-                        
-                    >Update LC</button>
-                </div> */}
+                >
+                    <div className='Main-containerMainArrow'>
+                        <div className={`Main-mainArrowUp ${toggleUserMenu ? 'animation' : ''}`}></div>
+                        <div className={`Main-mainArrowDown ${toggleUserMenu ? 'animation' : ''}`}></div>
+                    </div>
+                    
+                    <div className='Main-containerSecondArrow'>
+                        <div className={`Main-secondArrowUp ${toggleUserMenu ? 'animation' : ''}`}></div>
+                        <div className={`Main-secondArrowDown ${toggleUserMenu ? 'animation' : ''}`}></div>
+                    </div>
+                </button>
+
+                <button 
+                    className={`Main-containerBtnCloseUserMenu ${toggleUserMenu ? 'Main-activeUserMenu' : ''}`}
+                    style={toggleUserMenu ? {zIndex: 1, cursor: 'pointer'} : {zIndex: -1}}
+                    disabled={toggleUserMenu ? false : true} 
+                    onClick={() => {
+                        setToggleUserMenu(false)
+                    }}
+                >
+                    <div className={`Main-lineUp ${toggleUserMenu ? 'animation' : ''}`}></div>
+                    <div className={`Main-lineDown ${toggleUserMenu ? 'animation' : ''}`}></div>
+                </button>
+            </div>
+
+            <div className={`Main-containerBgTitle ${toggleUserMenu ? 'Main-activeUserMenu' : ''}`}>
+                <h1 className='Main-titleBg'>ALTimes</h1>
+
+                <p className='Main-textVer'>v. 0.2</p>
+    
+                <span className='Main-dotTitle'></span>
+            </div>
+
+            {/* main container */}
+            <div className={`Main-container ${toggleUserMenu ? 'activeUserMenu' : ''}`}>
+                <div className='Main-wrapper'>
+                    {/* COMMISSION */}
+                    <div className='Main-containerTimers'>
+                        <p className='Main-titleContainerTimers'>Commission</p>
+
+                        <TimerCreater
+                            agentSoundNotify={agentSoundNotify}
+                            controlSoundNotify={controlSoundNotify}
+
+                            saveLocalTime={saveLocalTime}
+                            setSaveLocalTime={setSaveLocalTime}
+                            collectionTimes={commTimes}
+                            maxAmountTimers={4}
+                            typeTimer='COMM'
+                        />
+                    </div>
+
+                    {/* CLASSROOM */}
+                    <div className='Main-containerTimers'>
+                        <p className='Main-titleContainerTimers'>Classroom</p>
+
+                        <TimerCreater
+                            agentSoundNotify={agentSoundNotify}
+                            controlSoundNotify={controlSoundNotify}
+
+                            saveLocalTime={saveLocalTime}
+                            setSaveLocalTime={setSaveLocalTime}
+                            collectionTimes={bookTimes}
+                            maxAmountTimers={4}
+                            typeTimer='BOOK'
+                        />
+                    </div>
+
+                    {/* LAB */}
+                    <div className='Main-containerTimers'>
+                        <p className='Main-titleContainerTimers'>Lab</p>
+
+                        <TimerCreater
+                            agentSoundNotify={agentSoundNotify}
+                            controlSoundNotify={controlSoundNotify}
+
+                            saveLocalTime={saveLocalTime}
+                            setSaveLocalTime={setSaveLocalTime}
+                            collectionTimes={projTimes}
+                            maxAmountTimers={1}
+                            typeTimer='PROJ'
+                        />
+                    </div>
+                </div>
             </div>
         </>
     )
 }
+
+export default App;
+
+// TODO спам звука разрешен в меню
+// TODO стили чекбокс вкл\выкл уведомлений
+// TODO версия рендера - фикс уведомление на вкладке

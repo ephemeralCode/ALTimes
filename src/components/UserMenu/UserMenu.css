@@ -1,0 +1,290 @@
+.UserMenu-wrapper{
+    display: flex;
+    flex-direction: column;
+
+    padding: 40px;
+
+    width: 100%;
+}
+
+.UserMenu-titleNotification {
+    font-size: 28px;
+    font-weight: 600;
+    color: #FAE600;
+}
+
+.UserMenu-containerToggleSound {
+    display: flex;
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin: 40px 0 0 0;
+}
+
+.UserMenu-textToggle {
+    font-size: 28px;
+    color: #FFFFFF;
+}
+
+.UserMenu-containerSelectSound {
+    margin: 20px 0 0 0;
+}
+
+.UserMenu-textSelect, .UserMenu-textVolume  {
+    font-size: 28px;
+    color: #FFFFFF;
+}
+
+.UserMenu-selectSound {
+    width: 100%;
+    height: 40px;
+
+    margin: 5px 0 0 0;
+    padding: 0 0 0 15px;
+
+    background: rgba(63, 63, 63, 0.8);
+    border: 2px solid rgba(0, 0, 0, 0.7);
+
+    font-size: 20px;
+    color: #9D9D9D;
+    
+    outline: none;
+    cursor: pointer;
+}
+
+.UserMenu-currentSelectSound {
+    margin: 5px 0 0 0;
+
+    font-size: 14px;
+    color: #FFFFFF;
+}
+
+.UserMenu-containerVolume {
+    margin: 20px 0 0 0;
+}
+
+/* ползунок */
+.UserMenu-wrapperVolume {
+    display: flex;
+    justify-content: space-between;
+
+    margin: 15px 0 0 0;
+}
+
+/* ! */
+
+.UserMenu-inputVolume[type=range] {
+    width: 252px;
+    height: 8px;
+
+    border-radius: 0;
+
+    -webkit-appearance: none;
+    cursor: pointer;
+}
+  
+.UserMenu-inputVolume[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 8px;
+    
+    background: #3F3F3F;
+    border: 1px solid rgba(0, 0, 0, 0.6);
+    border-radius: 0;
+
+    cursor: pointer;
+}
+
+.UserMenu-inputVolume[type=range]::-webkit-slider-thumb {
+    position: relative;
+
+    height: 18px;
+    width: 18px;
+
+    margin: -6px 0 0 0;
+
+    border: 2px solid #fff;
+    background: #FAE600;
+
+    cursor: pointer;
+    transform: rotate(45deg);
+    -webkit-appearance: none;
+}
+
+/* ! */
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+  .switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: var(--yellowMain);
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+
+/* ! */
+
+.UserMenu-inputVolume[type=range] {
+    width: 252px;
+    height: 8px;
+
+    border-radius: 0;
+
+    -webkit-appearance: none;
+    cursor: pointer;
+}
+  
+.UserMenu-inputVolume[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 8px;
+    
+    background: #3F3F3F;
+    border: 1px solid rgba(0, 0, 0, 0.6);
+    border-radius: 0;
+
+    cursor: pointer;
+}
+
+.UserMenu-inputVolume[type=range]::-webkit-slider-thumb {
+    position: relative;
+
+    height: 18px;
+    width: 18px;
+
+    margin: -6px 0 0 0;
+
+    border: 2px solid #fff;
+    background: #FAE600;
+
+    cursor: pointer;
+    transform: rotate(45deg);
+    -webkit-appearance: none;
+}
+
+/* ! */
+
+.UserMenu-btnListenSound {
+    width: 100%;
+    height: 40px;
+
+    margin: 20px 0 0 0;
+
+    background: rgba(0, 0, 0, 0.0);
+    border: 1px solid #FAE600;
+
+    font-size: 23px;
+    color: #FAE600;
+    
+    cursor: pointer;
+}
+
+.UserMenu-btnListenSound:hover {
+    background: var(--yellowHover);
+
+    color: black;
+    
+    transition: .3s ease-in-out;
+}
+
+.UserMenu-btnListenSound:not(:hover){
+    transition: .3s ease-in-out;
+}
+
+.UserMenu-containerDanger {
+    margin: 40px 0 0 0;
+}
+
+.UserMenu-titleDanger {
+    font-size: 28px;
+    font-weight: 600;
+    color: #AC3333;
+}
+
+.UserMenu-wrapperDanger {
+    margin: 20px 0 0 0;
+}
+
+.UserMenu-btnSoftReset, .UserMenu-btnHardReset {
+    width: 100%;
+    height: 40px;
+
+    background: rgba(0, 0, 0, 0.0);
+
+    border: 1px solid #AC3333;
+
+    font-size: 23px;
+    color: #AC3333;
+
+    cursor: pointer;
+}
+
+.UserMenu-btnHardReset {
+    margin: 10px 0 0 0;
+}
+
+.UserMenu-btnSoftReset:hover, .UserMenu-btnHardReset:hover {
+    background: rgb(216,60,62);
+
+    color: black;
+    
+    transition: .3s ease-in-out;
+}
+
+.UserMenu-btnSoftReset:not(:hover), .UserMenu-btnHardReset:not(:hover){
+    transition: .3s ease-in-out;
+}
+
+.UserMenu-textBackground {
+    position: absolute;
+    bottom: -160px;
+    right: 2px;
+    
+    font-weight: 600;
+    font-size: 140px;
+    color: rgba(255, 255, 255, 0.1);
+
+    transform: rotate(-90deg);
+    transform-origin: top left;
+}
