@@ -1,7 +1,8 @@
 {
   "files": {
-    "main.css": "/altimes/static/css/main.560a011c.css",
-    "main.js": "/altimes/static/js/main.dd8d998a.js",
+    "main.css": "/altimes/static/css/main.1928aa4b.css",
+    "main.js": "/altimes/static/js/main.ce242473.js",
+    "static/media/BG.webp": "/altimes/static/media/BG.4c670e33ef8757babaee.webp",
     "static/media/6.mp3": "/altimes/static/media/6.a46ce157ca180b9f6c51.mp3",
     "static/media/SFProDisplaySemibold.woff": "/altimes/static/media/SFProDisplaySemibold.340c3a1a6dddb0b99476.woff",
     "static/media/SFProDisplayRegular.woff": "/altimes/static/media/SFProDisplayRegular.7ee14c637e39445d7093.woff",
@@ -9,22 +10,24 @@
     "static/media/SFProDisplaySemibold.woff2": "/altimes/static/media/SFProDisplaySemibold.3926eb65ce4420a81930.woff2",
     "static/media/SFProDisplayRegular.woff2": "/altimes/static/media/SFProDisplayRegular.d5ff9f6824d2c6607361.woff2",
     "static/media/2.mp3": "/altimes/static/media/2.4c1cda15afd84d083034.mp3",
-    "static/media/BG.webp": "/altimes/static/media/BG.63cfed5b3c42ea811e63.webp",
+    "static/media/permissions2.jpg": "/altimes/static/media/permissions2.14cb773c1444073003e5.jpg",
     "static/media/5.mp3": "/altimes/static/media/5.81bf8f8c01f09cfe6e00.mp3",
     "static/media/1.mp3": "/altimes/static/media/1.40c2f6729b00cad9c293.mp3",
     "static/media/7.mp3": "/altimes/static/media/7.1df0ad34a80721f519ec.mp3",
+    "static/media/permissions1.jpg": "/altimes/static/media/permissions1.4cddb282e9b9d650e0e1.jpg",
     "static/media/3.mp3": "/altimes/static/media/3.007408f4ce76d6880f4c.mp3",
     "static/media/iconAddTimer.svg": "/altimes/static/media/iconAddTimer.7aa5c544af33b0cb468f2c49d7187c89.svg",
     "static/media/iconRemoveTimer.svg": "/altimes/static/media/iconRemoveTimer.3f8f7c62296949dc7243574aef2d42a6.svg",
     "index.html": "/altimes/index.html",
+    "static/media/iconVolume.svg": "/altimes/static/media/iconVolume.0a7004859853c5f23a257bbd3a311b63.svg",
     "static/media/iconCompleteTimer.svg": "/altimes/static/media/iconCompleteTimer.7af02aedb4d3d347e2ff932020348954.svg",
     "static/media/iconCancelTimer.svg": "/altimes/static/media/iconCancelTimer.e56c42500776133f5929d33ad77bb0b1.svg",
     "static/media/iconStartTimer.svg": "/altimes/static/media/iconStartTimer.20b99de3c51e0ed843544b8c7a0180cc.svg",
-    "main.560a011c.css.map": "/altimes/static/css/main.560a011c.css.map",
-    "main.dd8d998a.js.map": "/altimes/static/js/main.dd8d998a.js.map"
+    "main.1928aa4b.css.map": "/altimes/static/css/main.1928aa4b.css.map",
+    "main.ce242473.js.map": "/altimes/static/js/main.ce242473.js.map"
   },
   "entrypoints": [
-    "static/css/main.560a011c.css",
-    "static/js/main.dd8d998a.js"
+    "static/css/main.1928aa4b.css",
+    "static/js/main.ce242473.js"
   ]
 }
