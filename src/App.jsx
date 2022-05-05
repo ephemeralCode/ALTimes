@@ -3,9 +3,12 @@ import { React, useState, useEffect, useRef } from 'react';
 // components
 import { TimerCreater } from './components/TimerCreater/TimerCreater';
 import { UserMenu } from './components/UserMenu/UserMenu';
+import { ModalWindow } from './components/ModalWindow/ModalWindow';
+
 
 // styles
 import './style/App.css';
+import './style/media.css';
 
 // fonts
 import './style/fonts.css'
@@ -76,6 +79,12 @@ export function App() {
 
     const [saveLocalTime, setSaveLocalTime] = useState({COMM:[], BOOK:[], PROJ:[]})
     const [toggleUserMenu, setToggleUserMenu] = useState(false)
+    const [toggleModalWindow, setToggleModalWindow] = useState(
+        localStorage.USER_FIRST_TIME ?
+            JSON.parse(localStorage.USER_FIRST_TIME).firstTime
+            :
+            true
+    )
     const [toggleSoundNotify, setToggleSoundNotify] = useState(
         localStorage.USER_SETTINGS ? 
             JSON.parse(localStorage.USER_SETTINGS).soundNotify
@@ -100,7 +109,7 @@ export function App() {
     const intervalAgentControl = useRef()
   
     //* LC check
-    if (!localStorage.getItem('USER_TIME')) {
+    if (!localStorage.USER_TIME) {
         localStorage.setItem('USER_TIME', (JSON.stringify({COMM:[], BOOK:[], PROJ:[]})))
     }
 
@@ -110,6 +119,10 @@ export function App() {
             music: collectionSoundNotify[0].value,
             volume: '5'
         }))
+    }
+
+    if (!localStorage.USER_FIRST_TIME) {
+        localStorage.setItem('USER_FIRST_TIME', (JSON.stringify({firstTime: true})))
     }
 
     //* load LC
@@ -162,8 +175,16 @@ export function App() {
 
     return (
         <>
-            {/* menu */}
-            <div className={`Main-containerUserMenu ${toggleUserMenu ? 'Main-activeUserMenu' : ''}`}>
+            {/* ModalWindow */}
+            <div className={`ModalWindow-blur ${toggleModalWindow ? 'activeModalWindow' : ''}`}>
+                <ModalWindow 
+                    toggleModalWindow={toggleModalWindow}
+                    setToggleModalWindow={setToggleModalWindow}
+                />
+            </div>
+
+            {/* UserMenu */}
+            <div className={`Main-containerUserMenu ${toggleUserMenu ? 'activeUserMenu' : ''}`}>
                 <UserMenu
                     collectionSoundNotify={collectionSoundNotify}
                     toggleSoundNotify={toggleSoundNotify}
@@ -175,12 +196,14 @@ export function App() {
                     setVolumeSoundNotify={setVolumeSoundNotify}
 
                     setSaveLocalTime={setSaveLocalTime}
+                    setToggleModalWindow={setToggleModalWindow}
                 />
             </div>
 
+            {/* UserMenu btns */}
             <div className='Main-containerBtnsUserMenu'>
                 <button 
-                    className={`Main-containerBtnArrow ${toggleUserMenu ? 'Main-activeUserMenu' : ''}`}
+                    className={`Main-containerBtnArrow ${toggleUserMenu ? 'activeUserMenu' : ''}`}
                     style={toggleUserMenu ? {zIndex: -1} : {zIndex: 1}}
                     onClick={() => {
                         setToggleUserMenu(true)
@@ -198,7 +221,7 @@ export function App() {
                 </button>
 
                 <button 
-                    className={`Main-containerBtnCloseUserMenu ${toggleUserMenu ? 'Main-activeUserMenu' : ''}`}
+                    className={`Main-containerBtnCloseUserMenu ${toggleUserMenu ? 'activeUserMenu' : ''}`}
                     style={toggleUserMenu ? {zIndex: 1, cursor: 'pointer'} : {zIndex: -1}}
                     disabled={toggleUserMenu ? false : true} 
                     onClick={() => {
@@ -210,7 +233,7 @@ export function App() {
                 </button>
             </div>
 
-            <div className={`Main-containerBgTitle ${toggleUserMenu ? 'Main-activeUserMenu' : ''}`}>
+            <div className={`Main-containerBgTitle ${toggleUserMenu ? 'activeUserMenu' : ''}`}>
                 <h1 className='Main-titleBg'>ALTimes</h1>
 
                 <p className='Main-textVer'>v. 0.2</p>
@@ -220,7 +243,7 @@ export function App() {
 
             {/* main container */}
             <div className={`Main-container ${toggleUserMenu ? 'activeUserMenu' : ''}`}>
-                <div className='Main-wrapper'>
+                <div className={`Main-wrapper ${toggleModalWindow ? 'activeModalWindow' : ''}`}>
                     {/* COMMISSION */}
                     <div className='Main-containerTimers'>
                         <p className='Main-titleContainerTimers'>Commission</p>
@@ -275,7 +298,3 @@ export function App() {
 }
 
 export default App;
-
-// TODO спам звука разрешен в меню
-// TODO стили чекбокс вкл\выкл уведомлений
-// TODO версия рендера - фикс уведомление на вкладке

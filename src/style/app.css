@@ -45,7 +45,8 @@ body{
     top: 0;
     left: calc(var(--widthMenu) * -1);
 
-    width: var(--widthMenu);
+    max-width: var(--widthMenu);
+    width: 100%;
     height: 100%;
 
     background: rgba(32, 32, 32, 0.6);
@@ -56,7 +57,7 @@ body{
     transition: margin .5s ease-in-out;
 }
 
-.Main-activeUserMenu{
+.activeUserMenu{
     margin: 0 0 0 var(--widthMenu);
 }
 
@@ -213,6 +214,7 @@ body{
     left: 10px;
 
     width: 3px;
+    max-height: 380px;
     height: 39%;
 
     background: var(--yellowMain);
@@ -238,8 +240,8 @@ body{
 
 /* click */
 .Main-lineUp.animation {
-    left: 20px;
     top: 49.9%;
+    left: 20px;
 
     height: 80px;
 
@@ -266,14 +268,7 @@ body{
     transform: rotate(30deg);
 }
 
-/*! main !*/
-.Main-container{
-    transition: margin .6s ease-in-out;
-}
-
-.Main-container.activeUserMenu{
-    margin: 0 0 0 var(--widthMenu);
-}
+/*! background title !*/
 
 .Main-containerBgTitle{
     position: absolute;
@@ -323,6 +318,15 @@ body{
     color: var(--yellowMain);
 }
 
+/*! main !*/
+.Main-container{
+    transition: all .5s ease-in-out;
+}
+
+.Main-container.activeUserMenu{
+    margin: 0 0 0 var(--widthMenu);
+}
+
 .Main-wrapper{
     max-width: 700px;
     max-height: 800px;
@@ -334,8 +338,16 @@ body{
     background: rgba(32, 32, 32, 0.6);
     backdrop-filter: blur(10px);
 
+    opacity: 1;
+
     overflow-y: scroll;
     overflow-x: hidden;
+
+    transition: all .7s ease-in-out;
+}
+
+.Main-wrapper.activeModalWindow{
+    opacity: 0;
 }
 
 .Main-containerTimers{
@@ -386,53 +398,4 @@ body{
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--yellowMain); 
-}
-
-/*! brealpoints !*/
-
-/* width */
-@media only screen and (max-width: 1300px)  {
-    .Main-container.activeUserMenu{
-        margin: 0 0 0 var(--lowSizeScreen);
-    }
-}
-
-/* height */
-@media only screen and (max-height: 930px) {
-    .Main-wrapper {
-        max-height: 740px;
-        margin: 50px auto auto;
-    }
-}
-
-@media only screen and (max-height: 830px) {
-    .Main-wrapper {
-        max-height: 580px;
-        margin: 100px auto auto;
-    }
-
-    /* line close menu */
-    .Main-lineUp {
-        height: 37%;
-    }
-
-    .Main-lineDown {
-        height: 37%;
-    }
-
-    /* title bg */
-    .Main-titleBg {
-        font-size: 150px;
-    }
-
-    .Main-textVer {
-        top: 110px;
-    }
-
-    .Main-dotTitle {
-        top: 34px;
-        left: 271px;
-        width: 24px;
-        height: 24px;
-    }
 }

@@ -1,5 +1,7 @@
 import { React } from 'react';
 
+import icon from '../../img/icon/iconVolume.svg';
+
 // style
 import './UserMenu.css'
 
@@ -93,7 +95,7 @@ export const UserMenu = (props) => {
                         <span className='slider'></span>
                     </label>
                 </div>
-
+                        
                 <div className='UserMenu-containerSelectSound'>
                     <p className='UserMenu-textSelect'>Sound</p>
 
@@ -119,7 +121,10 @@ export const UserMenu = (props) => {
 
                     {/* slider */}
                     <div className='UserMenu-wrapperVolume'>
-                        <img  />
+                        <img 
+                            className='UserMenu-iconVolume' 
+                            src={icon}
+                        />
 
                         <input
                             className='UserMenu-inputVolume' 
@@ -140,18 +145,25 @@ export const UserMenu = (props) => {
                         />
                     </div>
 
-                    <button 
-                        className='UserMenu-btnListenSound'
-                        onClick={() => props.tabSoundNotify(props.toggleSoundNotify, props.soundNotify, props.volumeSoundNotify)}
-                    >Test Sound</button>
+                    <div className='UserMenu-containerNotifyBtns'>
+                        <button 
+                            className='UserMenu-btnListenSound'
+                            onClick={() => props.tabSoundNotify(props.toggleSoundNotify, props.soundNotify, props.volumeSoundNotify)}
+                        >Test Sound</button>
+
+                        <button
+                            className='UserMenu-btnSoundPermissions'
+                            onClick={() => props.setToggleModalWindow(true)}
+                        >Sound Permissions</button>
+                    </div>
                 </div>
             </div>
             
 
-            <div className='UserMenu-containerDanger'>
+            <div className='UserMenu-containerDangerBtns'>
                 <p className='UserMenu-titleDanger'>Dangerous Stuff</p>
 
-                <div className='UserMenu-wrapperDanger'>
+                <div className='UserMenu-wrapperDangerBtns'>
                     <button
                         className='UserMenu-btnSoftReset'
                         onClick={() => softReset()}
