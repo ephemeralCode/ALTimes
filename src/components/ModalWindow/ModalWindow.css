@@ -5,15 +5,15 @@
     top: 0;
     left: 0;
 
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
 
     backdrop-filter: blur(10px);
 
     z-index: 0;
     opacity: 0;
 
-    transition: all .7s ease-in-out;
+    transition: all .5s ease-in-out;
 }
 
 .ModalWindow-blur.activeModalWindow {
@@ -143,7 +143,7 @@
     right: -50px;
 
     max-width: 590px;
-    height: 100%;
+    height: 0;
     width: 100%;
 
     background: 
@@ -159,8 +159,22 @@
 
     -webkit-clip-path: polygon(8% 0, 100% 0, 90% 100%, 0% 100%);
     clip-path: polygon(8% 0, 100% 0, 100% 100%, 0% 100%);
+    /* opacity: 0; */
+
+    transition: all .1s linear;
 
     animation: animateLines 1.5s infinite linear;
+}
+
+/*! thx google chrome for ur bugs (quieres?) !*/
+.ModalWindow-line.animationOn {
+    height: 100%;
+}
+
+.ModalWindow-line.animationOff {
+    height: 0;
+
+    transition: all .1s linear .5s;
 }
 
 @keyframes animateLines {

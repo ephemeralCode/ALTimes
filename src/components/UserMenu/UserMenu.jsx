@@ -44,6 +44,11 @@ export const UserMenu = (props) => {
 
     const softReset = () => {
         props.setSaveLocalTime({COMM:[], BOOK:[], PROJ:[]})
+        props.setResetComplete(true)
+
+        setTimeout(() => {
+            props.setResetComplete(false)
+        }, 2000)
 
         localStorage.setItem('USER_TIME', (JSON.stringify({COMM:[], BOOK:[], PROJ:[]})));
     }
@@ -54,6 +59,11 @@ export const UserMenu = (props) => {
         props.soundNotify.current = new Audio(props.collectionSoundNotify[0].value)
         props.setVolumeSoundNotify(5)
         props.setToggleSoundNotify(true)
+        props.setResetComplete(true)
+
+        setTimeout(() => {
+            props.setResetComplete(false)
+        }, 2000)
 
         localStorage.setItem('USER_TIME', (JSON.stringify({COMM:[], BOOK:[], PROJ:[]})));
         localStorage.setItem('USER_SETTINGS', JSON.stringify({

@@ -5,7 +5,6 @@ import { TimerCreater } from './components/TimerCreater/TimerCreater';
 import { UserMenu } from './components/UserMenu/UserMenu';
 import { ModalWindow } from './components/ModalWindow/ModalWindow';
 
-
 // styles
 import './style/App.css';
 import './style/media.css';
@@ -79,6 +78,7 @@ export function App() {
 
     const [saveLocalTime, setSaveLocalTime] = useState({COMM:[], BOOK:[], PROJ:[]})
     const [toggleUserMenu, setToggleUserMenu] = useState(false)
+    const [resetComplete, setResetComplete] = useState(false)
     const [toggleModalWindow, setToggleModalWindow] = useState(
         localStorage.USER_FIRST_TIME ?
             JSON.parse(localStorage.USER_FIRST_TIME).firstTime
@@ -197,6 +197,7 @@ export function App() {
 
                     setSaveLocalTime={setSaveLocalTime}
                     setToggleModalWindow={setToggleModalWindow}
+                    setResetComplete={setResetComplete}
                 />
             </div>
 
@@ -233,6 +234,13 @@ export function App() {
                 </button>
             </div>
 
+            <div className={`ModalComplete-blur ${resetComplete ? 'animation' : ''}`}>
+                <div className={`ModalComplete-container ${resetComplete ?  'animationOn' : 'animationOff'}`}>
+                    <p className='ModalComplete-description'>Reset complete</p>
+                </div>
+            </div>
+
+            {/* title */}
             <div className={`Main-containerBgTitle ${toggleUserMenu ? 'activeUserMenu' : ''}`}>
                 <h1 className='Main-titleBg'>ALTimes</h1>
 

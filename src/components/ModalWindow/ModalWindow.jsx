@@ -8,7 +8,6 @@ import icon2 from '../../img/permissions2.jpg';
 import './ModalWindow.css';
 
 export const ModalWindow = (props) => {
-
     return (
         <div className={`ModalWindow-container ${props.toggleModalWindow ? 'activeModalWindow' : ''}`}>
             <div className='ModalWindow-containerNavbar'>
@@ -23,7 +22,7 @@ export const ModalWindow = (props) => {
                 <div className='ModalWindow-containerTitle'>
                     <p className='ModalWindow-title'>Warning</p>
 
-                    <span className='ModalWindow-line'></span>
+                    <span className={`ModalWindow-line ${props.toggleModalWindow ? 'animationOn' : 'animationOff'}`}></span>
                 </div>
             </div>
             
