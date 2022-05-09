@@ -73,8 +73,8 @@ export const TimerCreater = (props) => {
                 }
             </div>
 
-            
             <button
+                // TODO fix btn animation 
                 className={`TimerCreater-btnCreateTimer ${animationBtnCreateTimer ? 
                     'btnCreateTimerAnimationCreate' 
                     : 
@@ -85,7 +85,6 @@ export const TimerCreater = (props) => {
                 }}
             >
                 <img 
-                    name='PROJ'
                     className='TimerCreater-addTimerBtnImg' 
                     src={iconAddTimer} 
                 />
