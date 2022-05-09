@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 
 // components
 import { TimerInterface } from './TimerInterface/TimerInterface';
@@ -10,7 +10,13 @@ import './TimerCreater.css';
 import iconAddTimer from '../../img/icon/iconAddTimer.svg';
 
 export const TimerCreater = (props) => {
-    const [animationBtnCreateTimer, setAnimationBtnCreateTimer] = useState(props.saveLocalTime[props.typeTimer].length !== props.maxAmountTimers)
+    const [animationBtnCreateTimer, setAnimationBtnCreateTimer] = useState('')
+
+    // trigger animation btnCreateTimer
+    useEffect(() => {
+        setAnimationBtnCreateTimer(props.saveLocalTime[props.typeTimer].length !== props.maxAmountTimers)
+
+    }, [props.saveLocalTime])
 
     //* timer creation
     const addNewTimer = () => {
@@ -75,13 +81,6 @@ export const TimerCreater = (props) => {
                     'btnCreateTimerAnimationRemove'
                 }`}
                 onClick={() => {
-                    // trigger animation btnCreateTimer
-                    if (props.saveLocalTime[props.typeTimer].length + 1 !== props.maxAmountTimers) {
-                        setAnimationBtnCreateTimer(true)
-                    } else {
-                        setAnimationBtnCreateTimer(false)
-                    }
-
                     addNewTimer()
                 }}
             >

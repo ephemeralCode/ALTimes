@@ -3,7 +3,8 @@ import { React, useState, useEffect, useRef } from 'react';
 // components
 import { TimerCreater } from './components/TimerCreater/TimerCreater';
 import { UserMenu } from './components/UserMenu/UserMenu';
-import { ModalWindow } from './components/ModalWindow/ModalWindow';
+import { ModalWindowPermission } from './components/ModalWindow/ModalWindowPermission/ModalWindowPermission';
+import { ModalWindowDangerousSettings } from './components/ModalWindow/ModalWindowDangerousSettings/ModalWindowDangerousSettings';
 
 // styles
 import './style/App.css';
@@ -76,15 +77,11 @@ export function App() {
         {text: `Ship girl's voice`, value: shipGirlsVoice}
     ]
 
+    // timer
     const [saveLocalTime, setSaveLocalTime] = useState({COMM:[], BOOK:[], PROJ:[]})
+
+    // usermenu
     const [toggleUserMenu, setToggleUserMenu] = useState(false)
-    const [resetComplete, setResetComplete] = useState(false)
-    const [toggleModalWindow, setToggleModalWindow] = useState(
-        localStorage.USER_FIRST_TIME ?
-            JSON.parse(localStorage.USER_FIRST_TIME).firstTime
-            :
-            true
-    )
     const [toggleSoundNotify, setToggleSoundNotify] = useState(
         localStorage.USER_SETTINGS ? 
             JSON.parse(localStorage.USER_SETTINGS).soundNotify
@@ -104,6 +101,18 @@ export function App() {
             '5'
     )
 
+    // usermenu -> modalwindow
+    const [typeReset, setTypeReset] = useState(false)
+    const [softReset, setSoftReset] = useState(false)
+    const [hardReset, setHardReset] = useState(false)
+    const [toggleModalWindowDangerousSettings, setToggleModalWindowDangerousSettings] = useState(false)
+    const [toggleModalWindowPermission, setToggleModalWindowPermission] = useState(
+        localStorage.USER_FIRST_TIME ?
+            JSON.parse(localStorage.USER_FIRST_TIME).firstTime
+            :
+            true
+    )
+    
     const currentPlayingSound = useRef(soundNotify)
     const controlSoundNotify = useRef(false)
     const intervalAgentControl = useRef()
@@ -175,11 +184,23 @@ export function App() {
 
     return (
         <>
-            {/* ModalWindow */}
-            <div className={`ModalWindow-blur ${toggleModalWindow ? 'activeModalWindow' : ''}`}>
-                <ModalWindow 
-                    toggleModalWindow={toggleModalWindow}
-                    setToggleModalWindow={setToggleModalWindow}
+            {/* ModalWindow Permission */}
+            <div className={`ModalWindow-blur ${toggleModalWindowPermission ? 'activeModalWindow' : ''}`}>
+                <ModalWindowPermission 
+                    toggleModalWindowPermission={toggleModalWindowPermission}
+                    setToggleModalWindowPermission={setToggleModalWindowPermission}
+                />
+            </div>
+
+            {/* ModalWindow Dangerous settings */}
+            <div className={`ModalWindow-blur ${toggleModalWindowDangerousSettings ? 'activeModalWindow' : ''}`}>
+                <ModalWindowDangerousSettings 
+                    toggleModalWindowDangerousSettings={toggleModalWindowDangerousSettings}
+                    setToggleModalWindowDangerousSettings={setToggleModalWindowDangerousSettings}
+
+                    setSoftReset={setSoftReset}
+                    setHardReset={setHardReset}
+                    typeReset={typeReset}
                 />
             </div>
 
@@ -196,8 +217,12 @@ export function App() {
                     setVolumeSoundNotify={setVolumeSoundNotify}
 
                     setSaveLocalTime={setSaveLocalTime}
-                    setToggleModalWindow={setToggleModalWindow}
-                    setResetComplete={setResetComplete}
+                    
+                    setToggleModalWindowPermission={setToggleModalWindowPermission}
+                    setToggleModalWindowDangerousSettings={setToggleModalWindowDangerousSettings}
+                    softReset={softReset}
+                    hardReset={hardReset}
+                    setTypeReset={setTypeReset}
                 />
             </div>
 
@@ -234,12 +259,6 @@ export function App() {
                 </button>
             </div>
 
-            <div className={`ModalComplete-blur ${resetComplete ? 'animation' : ''}`}>
-                <div className={`ModalComplete-container ${resetComplete ?  'animationOn' : 'animationOff'}`}>
-                    <p className='ModalComplete-description'>Reset complete</p>
-                </div>
-            </div>
-
             {/* title */}
             <div className={`Main-containerBgTitle ${toggleUserMenu ? 'activeUserMenu' : ''}`}>
                 <h1 className='Main-titleBg'>ALTimes</h1>
@@ -251,7 +270,7 @@ export function App() {
 
             {/* main container */}
             <div className={`Main-container ${toggleUserMenu ? 'activeUserMenu' : ''}`}>
-                <div className={`Main-wrapper ${toggleModalWindow ? 'activeModalWindow' : ''}`}>
+                <div className={`Main-wrapper ${toggleModalWindowPermission || toggleModalWindowDangerousSettings ? 'activeModalWindow' : ''}`}>
                     {/* COMMISSION */}
                     <div className='Main-containerTimers'>
                         <p className='Main-titleContainerTimers'>Commission</p>

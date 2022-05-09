@@ -1,4 +1,4 @@
-import { React } from 'react';
+import { React, useEffect } from 'react';
 
 import icon from '../../img/icon/iconVolume.svg';
 
@@ -42,36 +42,54 @@ export const UserMenu = (props) => {
         }
     }
 
-    const softReset = () => {
-        props.setSaveLocalTime({COMM:[], BOOK:[], PROJ:[]})
-        props.setResetComplete(true)
+    useEffect(() => {
+        if (props.softReset) {
+            props.setSaveLocalTime({COMM:[], BOOK:[], PROJ:[]})
 
-        setTimeout(() => {
-            props.setResetComplete(false)
-        }, 2000)
+            localStorage.setItem('USER_TIME', (JSON.stringify({COMM:[], BOOK:[], PROJ:[]})))
+        }
+       
+    }, [props.softReset])
 
-        localStorage.setItem('USER_TIME', (JSON.stringify({COMM:[], BOOK:[], PROJ:[]})));
-    }
+    useEffect(() => {
+        if (props.hardReset) {
+            props.setSaveLocalTime({COMM:[], BOOK:[], PROJ:[]})
+            props.setSoundNotify(new Audio(props.collectionSoundNotify[0].value))
+            props.soundNotify.current = new Audio(props.collectionSoundNotify[0].value)
+            props.setVolumeSoundNotify(5)
+            props.setToggleSoundNotify(true)
+    
+            localStorage.setItem('USER_TIME', (JSON.stringify({COMM:[], BOOK:[], PROJ:[]})))
+            localStorage.setItem('USER_SETTINGS', JSON.stringify({
+                soundNotify: true,
+                music: props.collectionSoundNotify[0].value,
+                volume: '5'
+            }))
+        }
+        
+    }, [props.hardReset])
+    
 
-    const hardReset = () => {
-        props.setSaveLocalTime({COMM:[], BOOK:[], PROJ:[]})
-        props.setSoundNotify(new Audio(props.collectionSoundNotify[0].value))
-        props.soundNotify.current = new Audio(props.collectionSoundNotify[0].value)
-        props.setVolumeSoundNotify(5)
-        props.setToggleSoundNotify(true)
-        props.setResetComplete(true)
+    // const softReset = () => {
+    //     props.setSaveLocalTime({COMM:[], BOOK:[], PROJ:[]})
 
-        setTimeout(() => {
-            props.setResetComplete(false)
-        }, 2000)
+    //     localStorage.setItem('USER_TIME', (JSON.stringify({COMM:[], BOOK:[], PROJ:[]})))
+    // }
 
-        localStorage.setItem('USER_TIME', (JSON.stringify({COMM:[], BOOK:[], PROJ:[]})));
-        localStorage.setItem('USER_SETTINGS', JSON.stringify({
-            soundNotify: true,
-            music: props.collectionSoundNotify[0].value,
-            volume: '5'
-        }))
-    }
+    // const hardReset = () => {
+    //     props.setSaveLocalTime({COMM:[], BOOK:[], PROJ:[]})
+    //     props.setSoundNotify(new Audio(props.collectionSoundNotify[0].value))
+    //     props.soundNotify.current = new Audio(props.collectionSoundNotify[0].value)
+    //     props.setVolumeSoundNotify(5)
+    //     props.setToggleSoundNotify(true)
+
+    //     localStorage.setItem('USER_TIME', (JSON.stringify({COMM:[], BOOK:[], PROJ:[]})))
+    //     localStorage.setItem('USER_SETTINGS', JSON.stringify({
+    //         soundNotify: true,
+    //         music: props.collectionSoundNotify[0].value,
+    //         volume: '5'
+    //     }))
+    // }
 
     return (
         <div className='UserMenu-wrapper'>
@@ -163,7 +181,7 @@ export const UserMenu = (props) => {
 
                         <button
                             className='UserMenu-btnSoundPermissions'
-                            onClick={() => props.setToggleModalWindow(true)}
+                            onClick={() => props.setToggleModalWindowPermission(true)}
                         >Sound Permissions</button>
                     </div>
                 </div>
@@ -176,13 +194,21 @@ export const UserMenu = (props) => {
                 <div className='UserMenu-wrapperDangerBtns'>
                     <button
                         className='UserMenu-btnSoftReset'
-                        onClick={() => softReset()}
-                    >Soft Reset</button>
+                        name={'soft'}
+                        onClick={(e) => {
+                            props.setTypeReset(e.target.name)
+                            props.setToggleModalWindowDangerousSettings(true)
+                        }}
+                    >Timers Reset</button>
 
                     <button
                         className='UserMenu-btnHardReset'
-                        onClick={() => hardReset()}
-                    >Hard Reset</button>
+                        name={'hard'}
+                        onClick={(e) => {
+                            props.setTypeReset(e.target.name)
+                            props.setToggleModalWindowDangerousSettings(true)
+                        }}
+                    >Reset All</button>
                 </div>
             </div>
         

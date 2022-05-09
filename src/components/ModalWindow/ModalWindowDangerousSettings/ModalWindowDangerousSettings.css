@@ -1,0 +1,67 @@
+/*! dangerous styles !*/
+
+.ModalWindow-container.dangerous {
+    border-color: var(--redMain);
+
+    transition: all .5s ease-in-out .2s;
+}
+
+.ModalWindow-container.dangerous.activeModalWindow {
+    opacity: 0;
+}
+
+.ModalWindow-containerCloseBtn.dangerous, .ModalWindow-title.dangerous {
+    background: var(--redMain);
+}
+
+.ModalWindow-line.dangerous {
+    background: 
+        repeating-linear-gradient(
+            -45deg, 
+            rgba(255, 255, 255, 0), 
+            rgba(255, 255, 255, 0) 8px, 
+            var(--redMain) 4px, 
+            var(--redMain) 16px
+        )
+    ;
+    background-size: 45.5px 45.5px;
+}
+
+.ModalWindow-dangerousDescription {
+    margin: 20px 0 20px 0;
+
+    text-align: center;
+    font-size: 30px;
+
+    color: var(--redMain);
+}
+
+.ModalWindow-containerDangerousBtns {
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+
+    display: flex;
+    gap: 400px;
+
+    transform: translate(-50%, 0);
+}
+
+.ModalWindow-dangerousBtn {
+    height: 50px;
+
+    padding: 0 30px;
+
+    background: var(--redMain);
+    border: none;
+
+    font-size: 26px;
+    text-transform: uppercase;
+
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+
+.ModalWindow-dangerousBtn:hover {
+    background: var(--redHover);
+}

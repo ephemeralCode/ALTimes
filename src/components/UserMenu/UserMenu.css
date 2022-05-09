@@ -197,7 +197,7 @@
 }
 
 .UserMenu-btnListenSound:hover, .UserMenu-btnSoundPermissions:hover {
-    background: var(--yellowHover);
+    background: var(--yellowMain);
 
     color: black;
     
@@ -215,7 +215,7 @@
 .UserMenu-titleDanger {
     font-size: 28px;
     font-weight: 600;
-    color: #AC3333;
+    color: var(--redMain);
 }
 
 .UserMenu-wrapperDangerBtns {
@@ -228,10 +228,10 @@
 
     background: rgba(0, 0, 0, 0.0);
 
-    border: 1px solid #AC3333;
+    border: 1px solid var(--redMain);
 
     font-size: 23px;
-    color: #AC3333;
+    color: var(--redMain);
 
     cursor: pointer;
 }
@@ -241,7 +241,7 @@
 }
 
 .UserMenu-btnSoftReset:hover, .UserMenu-btnHardReset:hover {
-    background: rgb(216,60,62);
+    background: var(--redMain);
 
     color: black;
     
@@ -263,6 +263,7 @@
 
     transform: rotate(-90deg);
     transform-origin: top left;
+    z-index: -1;
 }
 
 .UserMenu-textBackground::after {
