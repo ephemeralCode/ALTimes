@@ -112,7 +112,7 @@ export function App() {
     const controlSoundNotify = useRef(false)
     const intervalAgentControl = useRef()
   
-    //* LC check
+    //* LS check
     if (!localStorage.USER_TIME) {
         localStorage.setItem('USER_TIME', (JSON.stringify({COMM:[], BOOK:[], PROJ:[]})))
     }
@@ -129,7 +129,7 @@ export function App() {
         localStorage.setItem('USER_FIRST_TIME', (JSON.stringify({firstTime: true})))
     }
 
-    //* load LC
+    //* load LS
     useEffect(() => {
         const arrayTimes = JSON.parse(localStorage.USER_TIME)
 
@@ -141,7 +141,7 @@ export function App() {
   
     }, [0])
 
-    //* notify
+    //* sound notify
     const tabSoundNotify = (toggleSoundNotify, soundNotify, volumeSoundNotify) => {
         if (toggleSoundNotify) {
             // clearing prev sound
@@ -155,7 +155,7 @@ export function App() {
         }
     }
 
-    //* manager notify
+    //* manager sound notify
     const agentSoundNotify = () => {
         const music = soundNotify
         const volume = volumeSoundNotify

@@ -35,7 +35,6 @@ export const TimerInterface = (props) => {
 
     const intervalTimer = useRef()
     const intervalNotify = useRef()
-    const timerAnimationEnd = useRef()
 
     //* scrollTimer
     function stopScroll(elem){
@@ -149,7 +148,21 @@ export const TimerInterface = (props) => {
         <>
             <div 
                 className={`TimerInterface-containerAnimationTimer ${animationTimerRemove ? 'TimerInterface-animationTimerRemove' : ''}`}
-                ref={timerAnimationEnd} 
+                onAnimationEnd={(e) => {
+                    if (e.animationName === 'animationTimerRemoveSize' && !props.generalSettings.isFinish) {
+                        clearInterval(intervalTimer.current)
+
+                        removeTimer()
+                    } else if (e.animationName === 'animationTimerRemoveSize' && props.generalSettings.isFinish) {
+                        clearInterval(intervalTimer.current)
+                        clearInterval(intervalNotify.current)
+                        removeTimer()
+
+                        window.blur()
+                        document.title = tabTitle
+                        document.head.children[1].attributes[1].value = tabIcon
+                    }
+                }}
             >
                 <div className='TimerInterface-timerСreateAnimation'></div>
                 
@@ -160,17 +173,12 @@ export const TimerInterface = (props) => {
                                 <button
                                     className='TimerInterface-completedTimerBtn'
                                     onClick={() => {
-                                        timerAnimationEnd.current.addEventListener('animationend', (e) => {
-                                            if (e.animationName === 'animationTimerRemoveSize') {
-                                                clearInterval(intervalTimer.current)
-                                                clearInterval(intervalNotify.current)
-                                                removeTimer()
-
-                                                window.blur()
-                                                document.title = tabTitle
-                                                document.head.children[1].attributes[1].value = tabIcon
-                                            }
-                                        })
+                                        // trigger animation remove btn createTimer
+                                        if (props.saveLocalTime[props.typeTimer].length - 1 !== props.maxAmountTimers) {
+                                            props.setAnimationBtnCreateTimer(true)
+                                        } else {
+                                            props.setAnimationBtnCreateTimer(false)
+                                        }
 
                                         setAnimationTimerRemove(true)
                                     }}
@@ -186,15 +194,8 @@ export const TimerInterface = (props) => {
                             !props.generalSettings.isFinish &&
                                 <button
                                     className='TimerInterface-removeTimerBtn'
+                                    
                                     onClick={() => {
-                                        timerAnimationEnd.current.addEventListener('animationend', (e) => {
-                                            if (e.animationName === 'animationTimerRemoveSize') {
-                                                clearInterval(intervalTimer.current)
-
-                                                removeTimer()
-                                            }
-                                        })
-
                                         // trigger animation remove btn createTimer
                                         if (props.saveLocalTime[props.typeTimer].length - 1 !== props.maxAmountTimers) {
                                             props.setAnimationBtnCreateTimer(true)
