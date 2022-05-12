@@ -1,6 +1,7 @@
-import { React, useEffect } from 'react';
+import { React } from 'react';
 
-import icon from '../../img/icon/iconVolume.svg';
+// icon
+import iconVolume from '../../../img/icon/iconVolume.svg';
 
 // style
 import './UserMenu.css'
@@ -42,55 +43,6 @@ export const UserMenu = (props) => {
         }
     }
 
-    useEffect(() => {
-        if (props.softReset) {
-            props.setSaveLocalTime({COMM:[], BOOK:[], PROJ:[]})
-
-            localStorage.setItem('USER_TIME', (JSON.stringify({COMM:[], BOOK:[], PROJ:[]})))
-        }
-       
-    }, [props.softReset])
-
-    useEffect(() => {
-        if (props.hardReset) {
-            props.setSaveLocalTime({COMM:[], BOOK:[], PROJ:[]})
-            props.setSoundNotify(new Audio(props.collectionSoundNotify[0].value))
-            props.soundNotify.current = new Audio(props.collectionSoundNotify[0].value)
-            props.setVolumeSoundNotify(5)
-            props.setToggleSoundNotify(true)
-    
-            localStorage.setItem('USER_TIME', (JSON.stringify({COMM:[], BOOK:[], PROJ:[]})))
-            localStorage.setItem('USER_SETTINGS', JSON.stringify({
-                soundNotify: true,
-                music: props.collectionSoundNotify[0].value,
-                volume: '5'
-            }))
-        }
-        
-    }, [props.hardReset])
-    
-
-    // const softReset = () => {
-    //     props.setSaveLocalTime({COMM:[], BOOK:[], PROJ:[]})
-
-    //     localStorage.setItem('USER_TIME', (JSON.stringify({COMM:[], BOOK:[], PROJ:[]})))
-    // }
-
-    // const hardReset = () => {
-    //     props.setSaveLocalTime({COMM:[], BOOK:[], PROJ:[]})
-    //     props.setSoundNotify(new Audio(props.collectionSoundNotify[0].value))
-    //     props.soundNotify.current = new Audio(props.collectionSoundNotify[0].value)
-    //     props.setVolumeSoundNotify(5)
-    //     props.setToggleSoundNotify(true)
-
-    //     localStorage.setItem('USER_TIME', (JSON.stringify({COMM:[], BOOK:[], PROJ:[]})))
-    //     localStorage.setItem('USER_SETTINGS', JSON.stringify({
-    //         soundNotify: true,
-    //         music: props.collectionSoundNotify[0].value,
-    //         volume: '5'
-    //     }))
-    // }
-
     return (
         <div className='UserMenu-wrapper'>
             <div className='UserMenu-containerNotification'>
@@ -99,15 +51,16 @@ export const UserMenu = (props) => {
                 <div className='UserMenu-containerToggleSound'>
                     <p className='UserMenu-textToggle'>On \ Off</p>
 
-                    {/* checkbox */}
+                    
                     {/* <input 
                         onChange={() => setToggleSoundNotify()}
                         className='UserMenu-toggleInput' 
                         type='checkbox' 
                     /> */}
-
-                    <label className='switch'>
+                    {/* checkbox */}
+                    <label className='UserMenu-toggleContainer'>
                         <input
+                            className='UserMenu-toggleInput'
                             onChange={(e) => {
                                 props.setToggleSoundNotify(e.target.checked)
 
@@ -120,7 +73,7 @@ export const UserMenu = (props) => {
                             type='checkbox'
                             checked={props.toggleSoundNotify} // dinamic attribute (Instead of defaultValue)
                         />
-                        <span className='slider'></span>
+                        <span className='UserMenu-toggleSlider'></span>
                     </label>
                 </div>
                         
@@ -151,7 +104,7 @@ export const UserMenu = (props) => {
                     <div className='UserMenu-wrapperVolume'>
                         <img 
                             className='UserMenu-iconVolume' 
-                            src={icon}
+                            src={iconVolume}
                         />
 
                         <input
@@ -162,6 +115,8 @@ export const UserMenu = (props) => {
                             step={1}
                             onChange={(e) => {
                                 props.setVolumeSoundNotify(e.target.value)
+
+                                console.log(props.volumeSoundNotify)
                                 
                                 localStorage.USER_SETTINGS = JSON.stringify({
                                     soundNotify: props.toggleSoundNotify,
@@ -186,7 +141,6 @@ export const UserMenu = (props) => {
                     </div>
                 </div>
             </div>
-            
 
             <div className='UserMenu-containerDangerBtns'>
                 <p className='UserMenu-titleDanger'>Dangerous Stuff</p>
@@ -213,11 +167,6 @@ export const UserMenu = (props) => {
             </div>
         
             <p className='UserMenu-textBackground'>MENU</p>
-
-            <div className='UserMenu-containerLinks'>
-                <img></img>
-                <img></img>
-            </div>
         </div>
     )
 }

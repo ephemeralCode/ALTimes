@@ -1,8 +1,8 @@
 import { React } from 'react';
 
 // img
-import imgPermission1 from '../../../img/permissions1.jpg';
-import imgPermission2 from '../../../img/permissions2.jpg';
+import imgPermission1 from '../../../../img/permissions1.jpg';
+import imgPermission2 from '../../../../img/permissions2.jpg';
 
 // styles
 import './ModalWindowPermission.css';

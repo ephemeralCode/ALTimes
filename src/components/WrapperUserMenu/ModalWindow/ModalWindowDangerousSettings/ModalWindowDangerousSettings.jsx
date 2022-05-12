@@ -1,4 +1,5 @@
 import { React, useState } from 'react';
+import { SettingsCompleteNotify } from './SettingsCompleteNotify/SettingsCompleteNotify';
 
 // styles
 import './ModalWindowDangerousSettings.css';
@@ -47,12 +48,12 @@ export const ModalWindowDangerousSettings = (props) => {
                                 onClick={() => {
                                     setResetComplete(true)
                                     setActiveModalWindow(true)
-                                    props.setSoftReset(true)
+                                    props.softReset()
 
                                     setTimeout(() => {
                                         setResetComplete(false)
                                         setActiveModalWindow(false)
-                                        props.setSoftReset(false)
+
                                         props.setToggleModalWindowDangerousSettings(false)
                                     }, 2000)
                                 }}
@@ -65,12 +66,12 @@ export const ModalWindowDangerousSettings = (props) => {
                                 onClick={() => {
                                     setResetComplete(true)
                                     setActiveModalWindow(true)
-                                    props.setHardReset(true)
+                                    props.hardReset()
 
                                     setTimeout(() => {
                                         setResetComplete(false)
                                         setActiveModalWindow(false)
-                                        props.setHardReset(false)
+
                                         props.setToggleModalWindowDangerousSettings(false)
                                     }, 2000)
                                 }}
@@ -79,20 +80,9 @@ export const ModalWindowDangerousSettings = (props) => {
                 </div>
             </div>
 
-            {/* SettingsCompleteNotify */}
-            <div className={`SettingsCompleteNotify-container ${resetComplete ? 'animation' : ''}`}>
-                <div className='SettingsCompleteNotify-wrapper'>
-                    <span className={`SettingsCompleteNotify-animationLine ${resetComplete ? 'animationOn' : 'animationOff'}`}></span>
-
-                    <div className='SettingsCompleteNotify-containerLines'>
-                        <span className='SettingsCompleteNotify-line'></span>
-
-                        <p className='SettingsCompleteNotify-description'>Reset complete</p>
-
-                        <span className='SettingsCompleteNotify-line'></span>
-                    </div>  
-                </div>
-            </div>
+            <SettingsCompleteNotify 
+                resetComplete={resetComplete}
+            />
         </>
     )
 }

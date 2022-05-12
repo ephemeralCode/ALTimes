@@ -2,9 +2,7 @@ import { React, useState, useEffect, useRef } from 'react';
 
 // components
 import { TimerCreater } from './components/TimerCreater/TimerCreater';
-import { UserMenu } from './components/UserMenu/UserMenu';
-import { ModalWindowPermission } from './components/ModalWindow/ModalWindowPermission/ModalWindowPermission';
-import { ModalWindowDangerousSettings } from './components/ModalWindow/ModalWindowDangerousSettings/ModalWindowDangerousSettings';
+import { WrapperUserMenu } from './components/WrapperUserMenu/WrapperUserMenu'
 
 // styles
 import './style/App.css';
@@ -102,9 +100,6 @@ export function App() {
     )
 
     // usermenu -> modalwindow
-    const [typeReset, setTypeReset] = useState(false)
-    const [softReset, setSoftReset] = useState(false)
-    const [hardReset, setHardReset] = useState(false)
     const [toggleModalWindowDangerousSettings, setToggleModalWindowDangerousSettings] = useState(false)
     const [toggleModalWindowPermission, setToggleModalWindowPermission] = useState(
         localStorage.USER_FIRST_TIME ?
@@ -184,81 +179,29 @@ export function App() {
 
     return (
         <>
-            {/* ModalWindow Permission */}
-            <div className={`ModalWindow-blur ${toggleModalWindowPermission ? 'activeModalWindow' : ''}`}>
-                <ModalWindowPermission 
-                    toggleModalWindowPermission={toggleModalWindowPermission}
-                    setToggleModalWindowPermission={setToggleModalWindowPermission}
-                />
-            </div>
+            <WrapperUserMenu
+                // UserMenu
+                collectionSoundNotify={collectionSoundNotify}
+                setSoundNotify={setSoundNotify}
+                soundNotify={soundNotify}
+                tabSoundNotify={tabSoundNotify}
+                volumeSoundNotify={volumeSoundNotify}
+                setVolumeSoundNotify={setVolumeSoundNotify}
+                toggleSoundNotify={toggleSoundNotify}
+                setToggleSoundNotify={setToggleSoundNotify}
 
-            {/* ModalWindow Dangerous settings */}
-            <div className={`ModalWindow-blur ${toggleModalWindowDangerousSettings ? 'activeModalWindow' : ''}`}>
-                <ModalWindowDangerousSettings 
-                    toggleModalWindowDangerousSettings={toggleModalWindowDangerousSettings}
-                    setToggleModalWindowDangerousSettings={setToggleModalWindowDangerousSettings}
+                // on/off UserMenu
+                toggleUserMenu={toggleUserMenu}
+                setToggleUserMenu={setToggleUserMenu}
 
-                    setSoftReset={setSoftReset}
-                    setHardReset={setHardReset}
-                    typeReset={typeReset}
-                />
-            </div>
-
-            {/* UserMenu */}
-            <div className={`Main-containerUserMenu ${toggleUserMenu ? 'activeUserMenu' : ''}`}>
-                <UserMenu
-                    collectionSoundNotify={collectionSoundNotify}
-                    toggleSoundNotify={toggleSoundNotify}
-                    setToggleSoundNotify={setToggleSoundNotify}
-                    tabSoundNotify={tabSoundNotify}
-                    soundNotify={soundNotify}
-                    setSoundNotify={setSoundNotify}
-                    volumeSoundNotify={volumeSoundNotify}
-                    setVolumeSoundNotify={setVolumeSoundNotify}
-
-                    setSaveLocalTime={setSaveLocalTime}
-                    
-                    setToggleModalWindowPermission={setToggleModalWindowPermission}
-                    setToggleModalWindowDangerousSettings={setToggleModalWindowDangerousSettings}
-                    softReset={softReset}
-                    hardReset={hardReset}
-                    setTypeReset={setTypeReset}
-                />
-            </div>
-
-            {/* UserMenu btns */}
-            <div className='Main-containerBtnsUserMenu'>
-                <button 
-                    className={`Main-containerBtnArrow ${toggleUserMenu ? 'activeUserMenu' : ''}`}
-                    style={toggleUserMenu ? {zIndex: -1} : {zIndex: 1}}
-                    onClick={() => {
-                        setToggleUserMenu(true)
-                    }}
-                >
-                    <div className='Main-containerMainArrow'>
-                        <div className={`Main-mainArrowUp ${toggleUserMenu ? 'animation' : ''}`}></div>
-                        <div className={`Main-mainArrowDown ${toggleUserMenu ? 'animation' : ''}`}></div>
-                    </div>
-                    
-                    <div className='Main-containerSecondArrow'>
-                        <div className={`Main-secondArrowUp ${toggleUserMenu ? 'animation' : ''}`}></div>
-                        <div className={`Main-secondArrowDown ${toggleUserMenu ? 'animation' : ''}`}></div>
-                    </div>
-                </button>
-
-                <button 
-                    className={`Main-containerBtnCloseUserMenu ${toggleUserMenu ? 'activeUserMenu' : ''}`}
-                    style={toggleUserMenu ? {zIndex: 1, cursor: 'pointer'} : {zIndex: -1}}
-                    disabled={toggleUserMenu ? false : true} 
-                    onClick={() => {
-                        setToggleUserMenu(false)
-                    }}
-                >
-                    <div className={`Main-lineUp ${toggleUserMenu ? 'animation' : ''}`}></div>
-                    <div className={`Main-lineDown ${toggleUserMenu ? 'animation' : ''}`}></div>
-                </button>
-            </div>
-
+                // ModalWindow
+                setSaveLocalTime={setSaveLocalTime}
+                toggleModalWindowPermission={toggleModalWindowPermission}
+                setToggleModalWindowPermission={setToggleModalWindowPermission}
+                toggleModalWindowDangerousSettings={toggleModalWindowDangerousSettings}
+                setToggleModalWindowDangerousSettings={setToggleModalWindowDangerousSettings}
+            />
+            
             {/* title */}
             <div className={`Main-containerBgTitle ${toggleUserMenu ? 'activeUserMenu' : ''}`}>
                 <h1 className='Main-titleBg'>ALTimes</h1>

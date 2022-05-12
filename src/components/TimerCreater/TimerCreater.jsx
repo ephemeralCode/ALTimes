@@ -16,7 +16,7 @@ export const TimerCreater = (props) => {
     useEffect(() => {
         setAnimationBtnCreateTimer(props.saveLocalTime[props.typeTimer].length !== props.maxAmountTimers)
 
-    }, [props.saveLocalTime])
+    }, [props.saveLocalTime[props.typeTimer]]) // Needed to control the animation of a certain type of timer
 
     //* timer creation
     const addNewTimer = () => {
